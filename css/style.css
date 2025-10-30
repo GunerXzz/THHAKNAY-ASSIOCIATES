@@ -1,0 +1,167 @@
+/* Custom Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+}
+
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Header Gradient Background */
+.bg-gold {
+    background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+                radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+}
+
+/* Khmer Flower Styling */
+.khmer-flower,
+.khmer-accent {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Changed to a more subtle animation */
+.khmer-pattern {
+    animation: pulse-glow 6s ease-in-out infinite;
+}
+
+.khmer-accent {
+    animation: spin-slow 20s linear infinite;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Section Background Patterns */
+section {
+    position: relative;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1e303e;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #2a4456;
+}
+
+/* Khmer Border Pattern */
+.khmer-border-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        #1e303e 0px,
+        #1e303e 10px,
+        transparent 10px,
+        transparent 20px
+    );
+}
+
+/* REMOVED - This class is no longer used */
+/*
+.kbach-khmer-png {
+    width: 50px;
+    height: 50px;
+}
+*/
+
+/* Card Hover Effects */
+.practice-card {
+    transition: all 0.3s ease;
+}
+
+.practice-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Decorative Khmer Pattern Background */
+.khmer-bg {
+    background-image:
+        radial-gradient(circle at 20% 20%, rgba(30, 48, 62, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(30, 48, 62, 0.05) 0%, transparent 50%);
+}
+
+/* Team Member Cards */
+.team-member {
+    transition: all 0.3s ease;
+}
+
+.team-member:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Section Divider with Khmer Pattern */
+.section-divider {
+    position: relative;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        #1e303e 20%,
+        #1e303e 80%,
+        transparent 100%
+    );
+}
+
+.section-divider::before,
+.section-divider::after {
+    content: '✦';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #1e303e;
+    font-size: 1.5rem;
+}
+
+.section-divider::before {
+    left: 10%;
+}
+
+.section-divider::after {
+    right: 10%;
+}
