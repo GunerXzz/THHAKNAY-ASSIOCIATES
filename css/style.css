@@ -26,10 +26,43 @@
     }
 }
 
+
+/* --- REMOVED ---
+ * These media queries were not being used by your HTML 
+ * (which uses Tailwind classes) and they conflict with
+ * Tailwind's mobile-first (min-width) approach.
+ * All responsive typography is now handled in index.html
+ * with Tailwind classes like md:text-lg, lg:text-xl, etc.
+ */
+/*
+@media screen and (max-width: 1200px) { 
+  .nav-menu-link {
+    font-size: 16px; 
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .logo-text {
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .nav-menu-link {
+    font-size: 15px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  
+  .logo-text {
+    font-size: 20px;
+  }
+}
+*/
+
 /* Header Gradient Background */
 .bg-gold {
-    background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
-                radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+    background: #D1B464;
 }
 
 /* Khmer Flower Styling */
@@ -125,7 +158,8 @@ section {
     transform: scale(1.05);
 }
 
-/* Responsive Typography */
+/* *** REMOVED Conflicting Responsive Typography *** */
+/* This block conflicted with Tailwind's responsive font classes
 @media (max-width: 768px) {
     h1 {
         font-size: 2.5rem;
@@ -135,6 +169,7 @@ section {
         font-size: 2rem;
     }
 }
+*/
 
 /* Section Divider with Khmer Pattern */
 .section-divider {

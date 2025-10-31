@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THHAKNAY & ASSOCIATES - Law Firm</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,14 +14,24 @@
     <script>
         tailwind.config = {
             theme: {
+                // *** CONTAINER CONFIG TO UNIFY DESKTOP/LAPTOP ***
+                container: {
+                    center: true,
+                    padding: '1rem', // Replaces px-4
+                    screens: {
+                        sm: '640px',
+                        md: '768px',
+                        lg: '1024px',
+                        xl: '1400px',  // Makes laptop view wider
+                        '2xl': '1400px', // Matches 24" view to laptop
+                    }
+                },
                 extend: {
                     colors: {
                         primary: '#1e303e',
                         'primary-light': '#2a4456',
-                        // ADDED: Gold color for new design
                         'gold': '#D1B464', 
                     },
-                    // Add new font families
                     fontFamily: {
                         'body': ['Inter', 'Noto Sans Khmer', 'sans-serif'],
                         'heading': ['Montserrat', 'Noto Sans Khmer', 'sans-serif'],
@@ -32,22 +43,27 @@
 </head>
 <body class="font-body"> 
     <header class="fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300 ease-in-out">
-        <div class="container mx-auto px-4 h-full">
+        <div class="container h-full">
             <div class="flex items-center justify-between h-full">
-                <a href="#" class="text-2xl font-bold text-white flex items-center gap-3 font-heading transition-colors duration-300">
+                
+                <a href="#" class="font-bold text-white flex items-center gap-3 font-heading transition-colors duration-300">
                     <div class="w-10 h-10 khmer-flower">
                         <img src="images/Thhaknay_Logo.jpg" alt="THHAKNAY & ASSOCIATES Logo" class="rounded-full" />
                     </div>
-                    THHAKNAY & ASSOCIATES
+                    
+                    <span class="text-xl md:hidden">T&A</span>
+
+                    <span class="hidden md:inline md:text-lg xl:text-xl">THHAKNAY & ASSOCIATES</span>
                 </a>
 
-                <nav class="hidden md:flex items-center gap-8">
-                    <a href="#" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300">Home</a>
-                    <a href="#about" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300">About Us</a>
-                    <a href="#practice" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300">Practice Areas</a>
-                    <a href="#team" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300">Our People</a>
-                    <a href="#contact" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300">Contact</a>
-                    <a href="#contact" class="bg-gold text-primary font-semibold px-6 py-2 rounded hover:opacity-90 transition-opacity">
+                <nav class="hidden md:flex items-center md:gap-2 lg:gap-4 xl:gap-6">
+                    <a href="#" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base">Home</a>
+                    <a href="#about" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base">About Us</a>
+                    <a href="#practice" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base">Practice Areas</a>
+                    <a href="#team" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base">Our People</a>
+                    <a href="#contact" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base">Contact</a>
+                    
+                    <a href="#contact" class="bg-gold text-primary font-semibold rounded hover:opacity-90 transition-opacity md:px-3 md:py-1 md:text-sm lg:px-4 lg:py-2 lg:text-base xl:px-6">
                         Connect Us
                     </a>
                 </nav>
@@ -60,21 +76,25 @@
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-            <div class="container mx-auto px-4 py-4">
-                <nav class="flex flex-col gap-4">
-                    <a href="#" class="text-gray-700 hover:text-primary transition-colors">Home</a>
-                    <a href="#about" class="text-gray-700 hover:text-primary transition-colors">About Us</a>
-                    <a href="#practice" class="text-gray-700 hover:text-primary transition-colors">Practice Areas</a>
-                    <a href="#team" class="text-gray-700 hover:text-primary transition-colors">Our People</a>
-                    <a href="#contact" class="text-gray-700 hover:text-primary transition-colors">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-white z-40 pt-16"> <div class="container h-full">
+                <nav class="flex flex-col justify-center items-center h-full gap-8">
+                    <a href="#" class="text-2xl font-heading font-semibold text-primary hover:text-gold transition-colors">Home</a>
+                    <a href="#about" class="text-2xl font-heading font-semibold text-primary hover:text-gold transition-colors">About Us</a>
+                    <a href="#practice" class="text-2xl font-heading font-semibold text-primary hover:text-gold transition-colors">Practice Areas</a>
+                    <a href="#team" class="text-2xl font-heading font-semibold text-primary hover:text-gold transition-colors">Our People</a>
+                    <a href="#contact" class="text-2xl font-heading font-semibold text-primary hover:text-gold transition-colors">Contact</a>
+                    <a href="#contact" class="mt-4 bg-gold text-primary font-semibold px-8 py-3 rounded hover:opacity-90 transition-opacity text-xl">
+                        Connect Us
+                    </a>
                 </nav>
             </div>
         </div>
     </header>
+    
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center"
-             style="background-image: linear-gradient(rgba(30, 48, 62, 0.7), rgba(30, 48, 62, 0.7)), url('images/p1.jpg');">
+             style="background-image: linear-gradient(rgba(30, 48, 62, 0.7), rgba(30, 48, 62, 0.7)), 
+             url('images/p6.jpg');">
         </div>
 
         <div class="absolute top-10 left-10 opacity-20">
@@ -86,8 +106,8 @@
                 <img src="images/rumdol.png" alt=""> </div>
         </div>
 
-        <div class="relative z-10 container mx-auto px-4 text-center text-white">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight font-heading">
+        <div class="relative z-10 container text-center text-white">
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight font-heading">
                 Excellence You Deserve,<br>
                 Results We Deliver
             </h1>
@@ -98,20 +118,20 @@
     </section>
 
     <section id="about" class="py-24 bg-white">
-        <div class="container mx-auto px-4">
+        <div class="container">
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 
                 <div>
                     <p class="text-lg font-semibold text-gold mb-2 tracking-wide">Experience Since 2010</p>
-                    <h2 class="text-4xl font-bold text-gray-900 mb-6 font-heading">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-heading">
                         Trusted And Comprehensive Legal Solutions
                     </h2>
-                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                    <p class="text-gray-600 text-base lg:text-lg leading-relaxed mb-6">
                         Delivering a complete spectrum of legal advisory and litigation services to both domestic
                         and international clients. Our firm brings specialized legal knowledge to every stage of
                         your business journey.
                     </p>
-                    <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                    <p class="text-gray-600 text-base lg:text-lg leading-relaxed mb-8">
                         From entity formation, regulatory compliance, and strategic negotiations
                         with stakeholders, to property transactions and comprehensive dispute resolution, we are your dedicated partners.
                     </p>
@@ -124,7 +144,7 @@
                     <div class="absolute top-0 left-0 w-full h-full bg-gray-50 rounded-lg transform -translate-x-4 translate-y-4" aria-hidden="true"></div>
                     
                     <img
-                        src="images/p2.jpg"
+                        src="images/p9.jpg"
                         alt="Diverse law firm colleagues collaborating in a modern office."
                         class="rounded-lg shadow-2xl w-full relative z-10"
                     >
@@ -135,7 +155,7 @@
     </section>
 
     <section id="practice" class="py-24 bg-gray-50 khmer-bg">
-        <div class="container mx-auto px-4">
+        <div class="container">
             <div class="grid lg:grid-cols-3 gap-12">
                 
                 <div class="lg:col-span-1">
@@ -145,8 +165,8 @@
                         </div>
                     </div>
                     <p class="text-primary text-lg font-semibold mb-2">OUR PRACTICE</p>
-                    <h2 class="text-4xl font-bold text-gray-900 mb-4 font-heading">Our Practice Areas</h2>
-                    <p class="text-gray-600 text-lg leading-relaxed">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-heading">Our Practice Areas</h2>
+                    <p class="text-gray-600 text-base lg:text-lg leading-relaxed">
                         We provide expert counsel across the full spectrum of corporate and commercial law. Our focus is on delivering clear, strategic, and effective results.
                     </p>
                     <div class="mt-8">
@@ -206,69 +226,51 @@
         </div>
     </section>
 
-    <section class="py-20 bg-gray-50 relative">
-        <div class="absolute bottom-0 left-0 opacity-5">
-            <div class="w-96 h-96" viewBox="0 0 200 200" fill="#1e303e">
-                <img src="images/kbach khmer.png" alt="">
+    <section id="why-us" class="py-24 bg-gray-50 khmer-bg">
+        <div class="container">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <p class="text-lg font-semibold text-gold mb-2 tracking-wide">OUR FEATURES</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-heading">Why Choose Us</h2>
+                <p class="text-base lg:text-lg text-gray-600 leading-relaxed">
+                    We are defined by a commitment to legal excellence, steadfast professionalism, and a sharp focus on achieving your desired outcomes.
+                </p>
             </div>
-        </div>
 
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <img
-                        src="images/p2.jpg"
-                        alt="A legal professionals reviewing documents at a desk."
-                        class="rounded-lg shadow-2xl w-full"
-                    >
-                </div>
-               <section id="why-us" class="py-24 bg-gray-50 khmer-bg">
-                    <div class="container mx-auto px-4">
-                        
-                        <div class="text-center max-w-3xl mx-auto mb-16">
-                            <p class="text-lg font-semibold text-gold mb-2 tracking-wide">OUR FEATURES</p>
-                            <h2 class="text-4xl font-bold text-gray-900 mb-4 font-heading">Why Choose Us</h2>
-                            <p class="text-lg text-gray-600 leading-relaxed">
-                                We are defined by a commitment to legal excellence, steadfast professionalism, and a sharp focus on achieving your desired outcomes.
-                            </p>
-                        </div>
-
-                        <div class="grid md:grid-cols-3 gap-8">
-                            
-                            <div class="bg-white p-8 rounded-lg shadow-lg text-center">
-                                <div class="flex-shrink-0 w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-6">
-                                    01
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-3 font-heading">Legal Excellence</h3>
-                                <p class="text-gray-600 leading-relaxed">Exceptional client service, comprehensive legal expertise, ethical standards, and collaborative teamwork.</p>
-                            </div>
-
-                            <div class="bg-white p-8 rounded-lg shadow-lg text-center">
-                                <div class="flex-shrink-0 w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-6">
-                                    02
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-3 font-heading">Reliability & Professionalism</h3>
-                                <p class="text-gray-600 leading-relaxed">Clear communication, efficient case handling, ethical conduct, and proactive problem-solving.</p>
-                            </div>
-
-                            <div class="bg-white p-8 rounded-lg shadow-lg text-center">
-                                <div class="flex-shrink-0 w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-6">
-                                    03
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-3 font-heading">Client-Focused Outcomes</h3>
-                                <p class="text-gray-600 leading-relaxed">Strategic planning, client-centered representation, and a results-driven methodology to achieve your objectives.</p>
-                            </div>
-
-                        </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                    <img src="images/p10.jpg" alt="Office building showing legal excellence" class="w-full h-48 object-cover">
+                    <div class="p-8 text-center flex-1 flex flex-col justify-start">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 font-heading">Legal Excellence</h3>
+                        <p class="text-gray-600 leading-relaxed">Exceptional client service, comprehensive legal expertise, ethical standards, and collaborative teamwork.</p>
                     </div>
-                </section>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                    <img src="images/p8.jpg" alt="A team collaborating with professionalism" class="w-full h-48 object-cover">
+                    <div class="p-8 text-center flex-1 flex flex-col justify-start">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 font-heading">Reliability & Professionalism</h3>
+                        <p class="text-gray-600 leading-relaxed">Clear communication, efficient case handling, ethical conduct, and proactive problem-solving.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                    <img src="images/p3.jpg" alt="A person winning a case, focused on outcomes" class="w-full h-48 object-cover">
+                    <div class="p-8 text-center flex-1 flex flex-col justify-start">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 font-heading">Client-Focused Outcomes</h3>
+                        <p class="text-gray-600 leading-relaxed">Strategic planning, client-centered representation, and a results-driven methodology to achieve your objectives.</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
     <section class="py-20 relative overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center"
-            style="background-image: linear-gradient(rgba(30, 48, 62, 0.85), rgba(30, 48, 62, 0.85)), url('images/p3.jpg');">
+            style="background-image: linear-gradient(rgba(30, 48, 62, 0.85), rgba(30, 48, 62, 0.85)), 
+            url('images/p3.jpg');">
         </div>
 
 
@@ -283,8 +285,8 @@
             </div>
         </div>
 
-        <div class="relative z-10 container mx-auto px-4 text-center text-white">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6 font-heading">
+        <div class="relative z-10 container text-center text-white">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-6 font-heading">
                 Let's Get Started. Contact Us Now<br>
                 For A Complimentary Consultation
             </h2>
@@ -295,7 +297,7 @@
     </section>
 
     <section id="team" class="py-24 bg-white">
-        <div class="container mx-auto px-4">
+        <div class="container">
             
             <div class="text-center mb-16">
                 <div class="flex justify-center mb-4">
@@ -304,20 +306,22 @@
                     </div>
                 </div>
                 <p class="text-primary text-lg font-semibold mb-2">OUR PEOPLE</p>
-                <h2 class="text-4xl font-bold text-gray-900 font-heading">Meet Our Team</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 font-heading">Meet Our Team</h2>
             </div>
 
             <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
                 <div class="relative overflow-hidden rounded-lg bg-gray-200">
-                    <svg class="w-full h-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    <div class="w-full h-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <img w-full h-full object-cover src="images/920331661431908274.jpg" alt="Poch Sopha">
+                    </div>
                 </div>
                 <div>
-                    <h3 class="text-3xl font-bold text-gray-900 mb-2 font-heading">Michael Harrison</h3>
-                    <p class="text-xl font-semibold text-gold mb-4">Managing Partner</p>
-                    <p class="text-gray-600 text-lg leading-relaxed mb-4">
+                    <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2 font-heading">Phann Sovichea</h3>
+                    <p class="text-lg lg:text-xl font-semibold text-gold mb-4">Managing Partner</p>
+                    <p class="text-gray-600 text-base lg:text-lg leading-relaxed mb-4">
                         With over two decades of experience, Michael specializes in international corporate law and complex litigation. He founded the firm with a vision of bringing world-class legal services to Cambodia.
                     </p>
-                    <p class="text-gray-600 text-lg leading-relaxed">
+                    <p class="text-gray-600 text-base lg:text-lg leading-relaxed">
                         His leadership and strategic insight are instrumental in navigating our clients' most challenging legal landscapes.
                     </p>
                 </div>
@@ -325,77 +329,69 @@
 
             <div class="relative">
                 <div class="overflow-hidden w-full">
-                    <div id="team-carousel-track" class="flex transition-transform duration-500 ease-in-out">
-                        
-                        <div class="flex-shrink-0 w-full sm:w-1/2 md:w-1/4 px-4 team-member-slide">
+                    <div id="team-carousel-track" class="flex transition-transform duration-500 ease-in-out">   
+
+                        <div class="flex-shrink-0 px-4 team-member-slide">
                             <a href="#" class="group team-member text-center">
                                 <div class="relative overflow-hidden rounded-lg mb-4 aspect-square bg-gray-200 flex items-center justify-center">
-                                    <svg class="w-24 h-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                    <img w-full h-full object-cover src="images/3615664149250549772.jpg" alt="Poch Sopha">
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-1 font-heading">Sarah Chen</h3>
+                                <h3 class="text-lg lg:text-xl font-bold text-gray-900 mb-1 font-heading">Poch Sopha</h3>
                                 <p class="text-gray-600">Senior Attorney</p>
                             </a>
                         </div>
-                        
-                        <div class="flex-shrink-0 w-full sm:w-1/2 md:w-1/4 px-4 team-member-slide">
+
+                        <div class="flex-shrink-0 px-4 team-member-slide">
                             <a href="#" class="group team-member text-center">
                                 <div class="relative overflow-hidden rounded-lg mb-4 aspect-square bg-gray-200 flex items-center justify-center">
-                                    <svg class="w-24 h-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                    <img w-full h-full object-cover src="images/3615664149250549772.jpg" alt="Poch Sopha">
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-1 font-heading">David Rodriguez</h3>
-                                <p class="text-gray-600">Corporate Counsel</p>
+                                <h3 class="text-lg lg:text-xl font-bold text-gray-900 mb-1 font-heading">Poch Sopha</h3>
+                                <p class="text-gray-600">Senior Attorney</p>
                             </a>
                         </div>
 
-                        <div class="flex-shrink-0 w-full sm:w-1/2 md:w-1/4 px-4 team-member-slide">
+                        <div class="flex-shrink-0 px-4 team-member-slide">
                             <a href="#" class="group team-member text-center">
                                 <div class="relative overflow-hidden rounded-lg mb-4 aspect-square bg-gray-200 flex items-center justify-center">
-                                    <svg class="w-24 h-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                    <img w-full h-full object-cover src="images/3615664149250549772.jpg" alt="Poch Sopha">
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-1 font-heading">Emily Watson</h3>
-                                <p class="text-gray-600">Litigation Specialist</p>
+                                <h3 class="text-lg lg:text-xl font-bold text-gray-900 mb-1 font-heading">Poch Sopha</h3>
+                                <p class="text-gray-600">Senior Attorney</p>
                             </a>
                         </div>
 
-                        <div class="flex-shrink-0 w-full sm:w-1/2 md:w-1/4 px-4 team-member-slide">
+                        <div class="flex-shrink-0 px-4 team-member-slide">
                             <a href="#" class="group team-member text-center">
                                 <div class="relative overflow-hidden rounded-lg mb-4 aspect-square bg-gray-200 flex items-center justify-center">
-                                    <svg class="w-24 h-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                    <img w-full h-full object-cover src="images/3615664149250549772.jpg" alt="Poch Sopha">
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-1 font-heading">James Kwon</h3>
-                                <p class="text-gray-600">Tax Advisor</p>
+                                <h3 class="text-lg lg:text-xl font-bold text-gray-900 mb-1 font-heading">Poch Sopha</h3>
+                                <p class="text-gray-600">Senior Attorney</p>
                             </a>
                         </div>
 
-                        <div class="flex-shrink-0 w-full sm:w-1/2 md:w-1/4 px-4 team-member-slide">
+                        <div class="flex-shrink-0 px-4 team-member-slide">
                             <a href="#" class="group team-member text-center">
                                 <div class="relative overflow-hidden rounded-lg mb-4 aspect-square bg-gray-200 flex items-center justify-center">
-                                    <svg class="w-24 h-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                    <img w-full h-full object-cover src="images/3615664149250549772.jpg" alt="Poch Sopha">
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-1 font-heading">Chantha Sok</h3>
-                                <p class="text-gray-600">Paralegal</p>
+                                <h3 class="text-lg lg:text-xl font-bold text-gray-900 mb-1 font-heading">Poch Sopha</h3>
+                                <p class="text-gray-600">Senior Attorney</p>
                             </a>
                         </div>
-                        <div class="flex-shrink-0 w-full sm:w-1/2 md:w-1/4 px-4 team-member-slide">
+
+                        <div class="flex-shrink-0 px-4 team-member-slide">
                             <a href="#" class="group team-member text-center">
                                 <div class="relative overflow-hidden rounded-lg mb-4 aspect-square bg-gray-200 flex items-center justify-center">
-                                    <svg class="w-24 h-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                    <img w-full h-full object-cover src="images/3615664149250549772.jpg" alt="Poch Sopha">
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-1 font-heading">Chantha Sok</h3>
-                                <p class="text-gray-600">Paralegal</p>
+                                <h3 class="text-lg lg:text-xl font-bold text-gray-900 mb-1 font-heading">Poch Sopha</h3>
+                                <p class="text-gray-600">Senior Attorney</p>
                             </a>
                         </div>
-                        <div class="flex-shrink-0 w-full sm:w-1/2 md:w-1/4 px-4 team-member-slide">
-                            <a href="#" class="group team-member text-center">
-                                <div class="relative overflow-hidden rounded-lg mb-4 aspect-square bg-gray-200 flex items-center justify-center">
-                                    <svg class="w-24 h-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-1 font-heading">Chantha Sok</h3>
-                                <p class="text-gray-600">Paralegal</p>
-                            </a>
-                        </div>
-                        
-                        </div>
+
+                    </div>
                 </div>
 
                 <button id="team-prev-btn" class="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-4 bg-white shadow-md rounded-full w-12 h-12 flex items-center justify-center text-primary hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed" aria-label="Previous team member">
@@ -416,7 +412,7 @@
             </div>
         </div>
 
-        <div class="container mx-auto px-4 py-12 relative z-10">
+        <div class="container py-12 relative z-10">
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
                     <div class="flex items-start gap-3 mb-6">
@@ -499,27 +495,7 @@
                     </ul>
                 </div>
 
-                <div>
-                    <h3 class="font-bold mb-4 font-heading">Newsletter</h3>
-                    <p class="text-gray-300 text-sm mb-4">
-                        Subscribe to receive updates on legal developments and firm news.
-                    </p>
-                    <form id="newsletter-form">
-                        <div class="flex gap-2">
-                            <input
-                                type="email"
-                                id="newsletter-email"
-                                placeholder="Your Email"
-                                class="flex-1 px-4 py-2 rounded bg-white/10 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40"
-                                required
-                            >
-                            <button type="submit" class="bg-white text-primary px-6 py-2 rounded font-semibold hover:bg-gray-100 transition-colors">
-                                Send
-                            </button>
-                        </div>
-                        <p id="newsletter-message" class="text-sm mt-2 h-4"></p>
-                    </form>
-                </div>
+                
             </div>
 
             <div class="mt-8 pt-8 border-t border-white/20 text-center text-sm text-gray-300">

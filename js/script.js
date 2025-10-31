@@ -1,16 +1,15 @@
-// Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function() {
+    
+    // --- Mobile Menu Toggle ---
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
 
     if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.addEventListener('click', function() {
             const isHidden = mobileMenu.classList.toggle('hidden');
-            // Toggle ARIA attribute
             mobileMenuBtn.setAttribute('aria-expanded', !isHidden);
         });
 
-        // Close mobile menu when clicking on a link
         const mobileLinks = mobileMenu.querySelectorAll('a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', function() {
@@ -20,14 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Smooth Scroll for all anchor links (ignoring empty hashes)
+    // --- Smooth Scroll for Anchor Links ---
     document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                // UPDATED: Changed offset from 80 to 64 for new header height
-                const headerOffset = 64; 
+                const headerOffset = 64; // h-16
                 const elementPosition = target.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -39,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Scroll Animation for Elements
+    // --- Scroll Animation for Sections ---
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -100px 0px'
@@ -50,12 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target); // Stop observing after it's visible
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe all sections
     document.querySelectorAll('section').forEach(section => {
         section.style.opacity = '0';
         section.style.transform = 'translateY(30px)';
@@ -63,11 +60,10 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(section);
     });
 
-    // --- REWRITTEN: Scroll listener for active links and header style ---
+    // --- Active Links & Header Style on Scroll ---
     window.addEventListener('scroll', function() {
         const sections = document.querySelectorAll('section[id]');
-        // UPDATED: Offset matches new header height (64px) + 16px buffer
-        const scrollPosition = window.pageYOffset + 80; 
+        const scrollPosition = window.pageYOffset + 80; // 64px header + 16px buffer
 
         // Active link styling
         sections.forEach(section => {
@@ -76,10 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const sectionId = section.getAttribute('id');
 
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                // Use new border style for active link
                 document.querySelectorAll('nav.hidden a[href^="#"]').forEach(link => {
                     link.classList.remove('text-primary', 'border-gold');
-                    // Add text-gray-700 only if the header is scrolled
                     if (window.pageYOffset > 50) {
                          link.classList.add('text-gray-700');
                     }
@@ -94,12 +88,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // --- UPDATED: Transparent-to-Solid Header Logic ---
+        // Transparent-to-Solid Header
         const header = document.querySelector('header');
-        const logoLink = header.querySelector('a.font-bold'); // The main logo link
-        const navLinks = header.querySelectorAll('nav.hidden a:not(.bg-gold)'); // Desktop links, not button
-        const mobileBtn = document.getElementById('mobile-menu-btn'); // Hamburger icon
-
+        const logoLink = header.querySelector('a.font-bold');
+        const navLinks = header.querySelectorAll('nav.hidden a:not(.bg-gold)');
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        
         if (window.pageYOffset > 50) {
             header.classList.add('shadow-lg', 'bg-white');
             logoLink.classList.remove('text-white');
@@ -108,7 +102,6 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileBtn.classList.add('text-primary');
             navLinks.forEach(link => {
                 link.classList.remove('text-white');
-                // Only add gray if it's not the active link
                 if (!link.classList.contains('text-primary')) {
                     link.classList.add('text-gray-700');
                 }
@@ -121,7 +114,6 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileBtn.classList.add('text-white');
             navLinks.forEach(link => {
                 link.classList.remove('text-gray-700');
-                // Only add white if it's not the active link
                 if (!link.classList.contains('text-primary')) {
                     link.classList.add('text-white');
                 }
@@ -129,9 +121,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- REWRITTEN Form Validation (for newsletter) ---
+    // --- Newsletter Form Validation ---
     const newsletterForm = document.getElementById('newsletter-form');
-    
     if (newsletterForm) {
         const emailInput = document.getElementById('newsletter-email');
         const messageEl = document.getElementById('newsletter-message');
@@ -140,28 +131,21 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const email = emailInput.value.trim();
             
-            // Clear previous messages
+            if (!messageEl) return; // Exit if message element doesn't exist
+            
             messageEl.textContent = '';
-            messageEl.classList.remove('text-green-300', 'text-red-300');
+            messageEl.classList.remove('text-green-300', 'text-red-300'); // Use appropriate colors from your new design if needed
 
-            if (email === '') {
-                messageEl.textContent = 'Please enter your email address.';
-                messageEl.classList.add('text-red-300');
+            if (email === '' || !isValidEmail(email)) {
+                messageEl.textContent = 'Please enter a valid email.';
+                messageEl.classList.add('text-red-300'); // Or a text-gold/warning color
                 return;
             }
 
-            if (!isValidEmail(email)) {
-                messageEl.textContent = 'Please enter a valid email address.';
-                messageEl.classList.add('text-red-300');
-                return;
-            }
-
-            // Success message
             messageEl.textContent = 'Thank you for subscribing!';
-            messageEl.classList.add('text-green-300');
+            messageEl.classList.add('text-green-300'); // Or a text-gold/success color
             emailInput.value = '';
 
-            // Optional: Clear success message after a few seconds
             setTimeout(() => {
                 messageEl.textContent = '';
                 messageEl.classList.remove('text-green-300');
@@ -169,31 +153,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Email validation helper
     function isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
 
-    // Add parallax effect to hero section
+    // --- Parallax Effect for Hero ---
     window.addEventListener('scroll', function() {
         const hero = document.querySelector('section.relative.h-screen');
         if (hero) {
             const scrolled = window.pageYOffset;
             const heroBackground = hero.querySelector('.absolute.inset-0');
             if (heroBackground) {
-                // Apply parallax effect
-                heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+                // Check for a second background image (parallax)
+                if(heroBackground.style.backgroundImage.includes('url(')) {
+                    heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
             }
         }
     });
 
-    // Console greeting
-    console.log('%c THHAKNAY & ASSOCIATES ', 'background: #1e303e; color: white; font-size: 20px; padding: 10px;');
-    console.log('%c Legal Excellence Since 2010 ', 'background: #2a4456; color: white; font-size: 14px; padding: 5px;');
-
-
-    // --- NEW: Team Carousel Logic ---
+    // --- *** NEW / FIXED: Team Carousel Logic *** ---
     function initTeamCarousel() {
         const track = document.getElementById('team-carousel-track');
         if (!track) return; // Exit if carousel isn't on the page
@@ -206,13 +186,16 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentIndex = 0;
         let autoSwapTimer = setInterval(slideNext, 5000); // Auto-swap every 5 seconds
 
+        // *** This function determines how many items to show ***
         function getItemsToShow() {
-            if (window.innerWidth >= 768) {
-                return 4; // 4 items on md and up
+            if (window.innerWidth >= 1024) {
+                return 4; // 4 items on lg and up
+            } else if (window.innerWidth >= 768) {
+                return 3; // 3 items on md (tablet)
             } else if (window.innerWidth >= 640) {
                 return 2; // 2 items on sm
             }
-            return 1; // 1 item on xs
+            return 1; // 1 item on xs (mobile)
         }
 
         function updateCarousel() {
@@ -220,18 +203,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const maxIndex = totalSlides - itemsToShow;
             
             if (currentIndex > maxIndex) {
-                currentIndex = maxIndex; // Adjust index if window resized
+                currentIndex = maxIndex;
             }
             if (currentIndex < 0) {
                 currentIndex = 0;
             }
+            
+            const itemWidthPercentage = 100 / itemsToShow;
+            track.style.transform = `translateX(-${currentIndex * itemWidthPercentage}%)`;
 
-            const itemWidth = 100 / itemsToShow;
-            track.style.transform = `translateX(-${currentIndex * (100 / totalSlides)}%)`;
-
-            // Adjust slide widths based on viewport
+            // This sets the width of each *individual slide*
             slides.forEach(slide => {
-                slide.style.width = `${itemWidth}%`;
+                slide.style.width = `${itemWidthPercentage}%`;
+                // Re-apply padding that was in the HTML
+                slide.style.paddingLeft = '1rem'; // px-4
+                slide.style.paddingRight = '1rem'; // px-4
             });
 
             // Update button states
@@ -278,12 +264,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Pause on hover
-        track.addEventListener('mouseenter', () => {
+        track.parentElement.addEventListener('mouseenter', () => {
             clearInterval(autoSwapTimer);
         });
 
         // Resume on mouse leave
-        track.addEventListener('mouseleave', () => {
+        track.parentElement.addEventListener('mouseleave', () => {
             resetAutoSwap();
         });
         
@@ -295,4 +281,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     initTeamCarousel(); // Run the carousel function
+    
+    // --- Console Greeting ---
+    console.log('%c THHANKNAY & ASSOCIATES ', 'background: #1e303e; color: white; font-size: 20px; padding: 10px;');
+    console.log('%c Legal Excellence Since 2010 ', 'background: #2a4456; color: white; font-size: 14px; padding: 5px;');
 });
