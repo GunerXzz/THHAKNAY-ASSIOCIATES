@@ -13,8 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const mobileLinks = mobileMenu.querySelectorAll('a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', function() {
-                mobileMenu.classList.add('hidden');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                if (link.getAttribute('href').startsWith('#')) { // Only close for anchor links
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
             });
         });
     }
@@ -64,6 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', function() {
         const sections = document.querySelectorAll('section[id]');
         const scrollPosition = window.pageYOffset + 80; // 64px header + 16px buffer
+        const header = document.querySelector('header');
+        if (!header) return;
 
         // Active link styling
         sections.forEach(section => {
@@ -89,17 +93,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Transparent-to-Solid Header
-        const header = document.querySelector('header');
         const logoLink = header.querySelector('a.font-bold');
         const navLinks = header.querySelectorAll('nav.hidden a:not(.bg-gold)');
         const mobileBtn = document.getElementById('mobile-menu-btn');
+        const langBtn = document.getElementById('language-toggle-btn');
         
         if (window.pageYOffset > 50) {
             header.classList.add('shadow-lg', 'bg-white');
-            logoLink.classList.remove('text-white');
-            logoLink.classList.add('text-primary');
-            mobileBtn.classList.remove('text-white');
-            mobileBtn.classList.add('text-primary');
+            if(logoLink) logoLink.classList.add('text-primary');
+            if(mobileBtn) mobileBtn.classList.add('text-primary');
+            if(langBtn) {
+                langBtn.classList.remove('bg-gold', 'text-primary');
+                langBtn.classList.add('bg-primary', 'text-white');
+            }
             navLinks.forEach(link => {
                 link.classList.remove('text-white');
                 if (!link.classList.contains('text-primary')) {
@@ -108,10 +114,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         } else {
             header.classList.remove('shadow-lg', 'bg-white');
-            logoLink.classList.remove('text-primary');
-            logoLink.classList.add('text-white');
-            mobileBtn.classList.remove('text-primary');
-            mobileBtn.classList.add('text-white');
+            if(logoLink) logoLink.classList.remove('text-primary');
+            if(mobileBtn) mobileBtn.classList.remove('text-primary');
+            if(langBtn) {
+                langBtn.classList.remove('bg-primary', 'text-white');
+                langBtn.classList.add('bg-gold', 'text-primary');
+            }
             navLinks.forEach(link => {
                 link.classList.remove('text-gray-700');
                 if (!link.classList.contains('text-primary')) {
@@ -121,38 +129,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- Newsletter Form Validation ---
-    const newsletterForm = document.getElementById('newsletter-form');
-    if (newsletterForm) {
-        const emailInput = document.getElementById('newsletter-email');
-        const messageEl = document.getElementById('newsletter-message');
-
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = emailInput.value.trim();
-            
-            if (!messageEl) return; // Exit if message element doesn't exist
-            
-            messageEl.textContent = '';
-            messageEl.classList.remove('text-green-300', 'text-red-300'); // Use appropriate colors from your new design if needed
-
-            if (email === '' || !isValidEmail(email)) {
-                messageEl.textContent = 'Please enter a valid email.';
-                messageEl.classList.add('text-red-300'); // Or a text-gold/warning color
-                return;
-            }
-
-            messageEl.textContent = 'Thank you for subscribing!';
-            messageEl.classList.add('text-green-300'); // Or a text-gold/success color
-            emailInput.value = '';
-
-            setTimeout(() => {
-                messageEl.textContent = '';
-                messageEl.classList.remove('text-green-300');
-            }, 3000);
-        });
-    }
-
+    // --- Newsletter Form Validation (Now Footer Business Hours) ---
+    // This is no longer in use, but we'll leave the function here
     function isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
@@ -173,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- *** NEW / FIXED: Team Carousel Logic *** ---
+    // --- Team Carousel Logic ---
     function initTeamCarousel() {
         const track = document.getElementById('team-carousel-track');
         if (!track) return; // Exit if carousel isn't on the page
@@ -186,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentIndex = 0;
         let autoSwapTimer = setInterval(slideNext, 5000); // Auto-swap every 5 seconds
 
-        // *** This function determines how many items to show ***
         function getItemsToShow() {
             if (window.innerWidth >= 1024) {
                 return 4; // 4 items on lg and up
@@ -210,19 +187,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             const itemWidthPercentage = 100 / itemsToShow;
-            track.style.transform = `translateX(-${currentIndex * itemWidthPercentage}%)`;
+            if (track) {
+                track.style.transform = `translateX(-${currentIndex * itemWidthPercentage}%)`;
+            }
 
-            // This sets the width of each *individual slide*
             slides.forEach(slide => {
                 slide.style.width = `${itemWidthPercentage}%`;
-                // Re-apply padding that was in the HTML
                 slide.style.paddingLeft = '1rem'; // px-4
                 slide.style.paddingRight = '1rem'; // px-4
             });
 
-            // Update button states
-            prevBtn.disabled = currentIndex === 0;
-            nextBtn.disabled = currentIndex === maxIndex;
+            if (prevBtn) prevBtn.disabled = currentIndex === 0;
+            if (nextBtn) nextBtn.disabled = currentIndex === maxIndex;
         }
 
         function slideNext() {
@@ -252,35 +228,56 @@ document.addEventListener('DOMContentLoaded', function() {
             autoSwapTimer = setInterval(slideNext, 5000);
         }
 
-        // Event Listeners
-        nextBtn.addEventListener('click', () => {
-            slideNext();
-            resetAutoSwap();
-        });
-
-        prevBtn.addEventListener('click', () => {
-            slidePrev();
-            resetAutoSwap();
-        });
-
-        // Pause on hover
-        track.parentElement.addEventListener('mouseenter', () => {
-            clearInterval(autoSwapTimer);
-        });
-
-        // Resume on mouse leave
-        track.parentElement.addEventListener('mouseleave', () => {
-            resetAutoSwap();
-        });
+        if(nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                slideNext();
+                resetAutoSwap();
+            });
+        }
         
-        // Update on window resize
-        window.addEventListener('resize', updateCarousel);
+        if(prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                slidePrev();
+                resetAutoSwap();
+            });
+        }
 
-        // Initial setup
+        if(track && track.parentElement) {
+            track.parentElement.addEventListener('mouseenter', () => {
+                clearInterval(autoSwapTimer);
+            });
+            track.parentElement.addEventListener('mouseleave', () => {
+                resetAutoSwap();
+            });
+        }
+        
+        window.addEventListener('resize', updateCarousel);
         updateCarousel();
     }
-
     initTeamCarousel(); // Run the carousel function
+
+    // *** NEW: Language Dropdown Toggle ***
+    function initLanguageToggle() {
+        const toggleBtn = document.getElementById('language-toggle-btn');
+        const menu = document.getElementById('language-menu');
+        
+        if (!toggleBtn || !menu) return; // Exit if elements not found
+
+        toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent window listener from closing it immediately
+            menu.classList.toggle('hidden');
+        });
+        
+        // Close dropdown if clicking outside
+        window.addEventListener('click', (e) => {
+            if (menu.classList.contains('hidden')) return; // Don't do anything if hidden
+            
+            if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+    }
+    initLanguageToggle(); // Run the language toggle function
     
     // --- Console Greeting ---
     console.log('%c THHANKNAY & ASSOCIATES ', 'background: #1e303e; color: white; font-size: 20px; padding: 10px;');
