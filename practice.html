@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/Thhaknay_Logo.jpg">
+    <title>Practice Areas - THHAKNAY & ASSOCIATES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&family=Noto+Sans+Khmer:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                // *** CONTAINER CONFIG TO UNIFY DESKTOP/LAPTOP ***
+                container: {
+                    center: true,
+                    padding: '1rem', // Replaces px-4
+                    screens: {
+                        sm: '640px',
+                        md: '768px',
+                        lg: '1024px',
+                        xl: '1400px',  // Makes laptop view wider
+                        '2xl': '1400px', // Matches 24" view to laptop
+                    }
+                },
+                extend: {
+                    colors: {
+                        primary: '#1e303e',
+                        'primary-light': '#2a4456',
+                        'gold': '#D1B464', 
+                    },
+                    fontFamily: {
+                        'body': ['Inter', 'Noto Sans Khmer', 'sans-serif'],
+                        'heading': ['Montserrat', 'Noto Sans Khmer', 'sans-serif'],
+                    },
+                    // We can define the gold glow here for Tailwind
+                    boxShadow: {
+                        'gold-glow': '0 10px 30px -5px rgba(209, 180, 100, 0.7)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-body"> 
+
+    <header class="fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300 ease-in-out">
+        <div class="container h-full">
+            <div class="flex items-center justify-between h-full">
+                
+                <a href="index.html" class="font-bold text-white flex items-center gap-3 font-heading transition-colors duration-300">
+                    <div class="w-10 h-10 khmer-flower">
+                        <img src="images/Thhaknay_Logo.jpg" alt="THHAKNAY & ASSOCIATES Logo" class="rounded-full" />
+                    </div>
+                    <span class="text-lg lg:hidden">THHAKNAY & ASSOCIATES</span>
+                    <span class="hidden lg:inline lg:text-lg xl:text-xl">THHAKNAY & ASSOCIATES</span>
+                </a>
+
+                <nav class="hidden lg:flex items-center md:gap-2 lg:gap-4 xl:gap-6">
+                    <a href="index.html" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base">Home</a>
+                    <a href="about.html" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base">About Us</a>
+                    <a href="practice.html" class="text-white pb-2 border-b-2 border-gold transition-colors duration-300 md:text-sm lg:text-base">Practice Areas</a>
+                    <a href="our-people.html" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base">Our People</a>
+                    <a href="contact.html" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base">Contact</a>
+                    
+                    <div class="relative">
+                        <button id="language-toggle-btn" class="bg-gold text-primary font-semibold rounded transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5 md:px-3 md:py-1 md:text-sm lg:px-4 lg:py-2 lg:text-base xl:px-6 flex items-center gap-1">
+                            <span>EN</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="language-menu" class="hidden absolute top-full right-0 mt-2 w-36 bg-white rounded-lg shadow-lg z-50 overflow-hidden">
+                            <a href="#" class="block px-4 py-2 text-primary hover:bg-gray-100 font-medium">English (EN)</a>
+                            <a href="#" class="block px-4 py-2 text-primary hover:bg-gray-100 font-medium">Khmer (KH)</a>
+                        </div>
+                    </div>
+                </nav>
+
+                <button id="mobile-menu-btn" class="lg:hidden text-white transition-colors duration-300" aria-label="Toggle menu" aria-controls="mobile-menu" aria-expanded="false">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden fixed inset-0 bg-white z-40 pt-16"> <div class="container h-full">
+                <nav class="flex flex-col justify-center items-center h-full gap-8">
+                    <a href="index.html" class="text-2xl font-heading font-semibold text-primary hover:text-gold transition-colors">Home</a>
+                    <a href="about.html" class="text-2xl font-heading font-semibold text-primary hover:text-gold transition-colors">About Us</a>
+                    <a href="practice.html" class="text-2xl font-heading font-semibold text-gold transition-colors">Practice Areas</a>
+                    <a href="our-people.html" class="text-2xl font-heading font-semibold text-primary hover:text-gold transition-colors">Our People</a>
+                    <a href="contact.html" class="text-2xl font-heading font-semibold text-primary hover:text-gold transition-colors">Contact</a>
+                    <a href="#" class="mt-4 bg-gold text-primary font-semibold px-8 py-3 rounded text-xl transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5">
+                        Switch to Khmer (KH)
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="relative bg-primary py-32 text-white overflow-hidden pt-48"> 
+            <div class="absolute inset-0 bg-cover bg-center"
+                 style="background-image: linear-gradient(rgba(30, 48, 62, 0.8), rgba(30, 48, 62, 0.8)), 
+                 url('images/p10.jpg'); filter: blur(2px);">
+            </div>
+            <div class="absolute top-1/2 left-10 transform -translate-y-1/2 opacity-10">
+                <div class="w-40 h-40 text-white">
+                    <img src="images/Tep.png" alt="">
+                </div>
+            </div>
+
+            <div class="container relative z-10 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold font-heading mb-4">Practice Areas</h1>
+                <p class="text-lg text-gold font-semibold">
+                    <a href="index.html" class="hover:text-white">Home</a> / <span class="text-white">Practice Areas</span>
+                </p>
+            </div>
+        </section>
+
+        <nav class="sticky top-16 bg-white shadow-md z-30">
+            <div class="container">
+                <div class="flex flex-wrap justify-center gap-x-4 md:gap-x-8">
+                    <a href="#corporate" class="quick-nav-link text-gray-600 hover:text-primary font-semibold py-4 border-b-2 border-transparent hover:border-gold transition-all duration-200">Corporate</a>
+                    <a href="#litigation" class="quick-nav-link text-gray-600 hover:text-primary font-semibold py-4 border-b-2 border-transparent hover:border-gold transition-all duration-200">Litigation</a>
+                    <a href="#compliance" class="quick-nav-link text-gray-600 hover:text-primary font-semibold py-4 border-b-2 border-transparent hover:border-gold transition-all duration-200">Compliance</a>
+                    <a href="#contract" class="quick-nav-link text-gray-600 hover:text-primary font-semibold py-4 border-b-2 border-transparent hover:border-gold transition-all duration-200">Contract</a>
+                    <a href="#real-estate" class="quick-nav-link text-gray-600 hover:text-primary font-semibold py-4 border-b-2 border-transparent hover:border-gold transition-all duration-200">Real Estate</a>
+                    <a href="#employment" class="quick-nav-link text-gray-600 hover:text-primary font-semibold py-4 border-b-2 border-transparent hover:border-gold transition-all duration-200">Employment</a>
+                </div>
+            </div>
+        </nav>
+
+        <section class="py-24 bg-white relative overflow-hidden practice-area-showcase">
+            <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none -z-10">
+                <img src="images/Tep.png" alt="" class="w-1/2 md:w-1/3 h-auto max-w-lg">
+            </div>
+
+            <div class="container relative z-10">
+
+                <div id="corporate" class="grid md:grid-cols-2 gap-16 items-center pt-12 mb-24">
+                    <div class="gallery-image-wrapper">
+                        <img src="images/p10.jpg" alt="Corporate Law" class="aspect-video rounded-lg">
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-4 md:gap-8 mb-6">
+                            <img src="images/rumdul kbach.png" alt="" class="w-10 h-10 md:w-12 md:h-12 khmer-pattern opacity-80">
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 font-heading">Corporate Law</h2>
+                        </div>
+                        <p class="text-gray-600 text-base lg:text-lg leading-relaxed mb-6">
+                            Our firm provides comprehensive counsel on all aspects of corporate law, from entity formation and governance to complex mergers and acquisitions. We guide our clients through business structuring, ensuring full compliance and strategic advantage in the Cambodian market.
+                        </p>
+                        <p class="text-gray-600 text-base lg:text-lg leading-relaxed">
+                            We act as trusted advisors for day-to-day operations and major transactions alike, prioritizing your business's long-term success.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="litigation" class="grid md:grid-cols-2 gap-16 items-center pt-12 mb-24">
+                    <div class="md:order-2 gallery-image-wrapper">
+                        <img src="images/p11.jpg" alt="Litigation" class="aspect-video rounded-lg">
+                    </div>
+                    <div class="md:order-1">
+                        <div class="flex items-center gap-4 md:gap-8 mb-6">
+                            <img src="images/rumdul kbach.png" alt="" class="w-10 h-10 md:w-12 md:h-12 khmer-pattern opacity-80">
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 font-heading">Litigation</h2>
+                        </div>
+                        <p class="text-gray-600 text-base lg:text-lg leading-relaxed mb-6">
+                            When disputes arise, you need a strong and strategic advocate. Our litigation team has a formidable reputation for representing clients in complex commercial, civil, and regulatory matters. We meticulously prepare every case, from pre-litigation negotiation to courtroom representation.
+                        </p>
+                         <p class="text-gray-600 text-base lg:text-lg leading-relaxed">
+                            We focus on achieving the most favorable outcome, whether through strategic settlement or assertive trial advocacy.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="compliance" class="grid md:grid-cols-2 gap-16 items-center pt-12 mb-24">
+                    <div class="gallery-image-wrapper">
+                        <img src="images/p9.jpg" alt="Compliance" class="aspect-video rounded-lg">
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-4 md:gap-8 mb-6">
+                            <img src="images/rumdul kbach.png" alt="" class="w-10 h-10 md:w-12 md:h-12 khmer-pattern opacity-80">
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 font-heading">Compliance</h2>
+                        </div>
+                        <p class="text-gray-600 text-base lg:text-lg leading-relaxed mb-6">
+                            Navigating Cambodia's regulatory landscape is a critical challenge. Our compliance team provides expert guidance to ensure your business operates with full integrity and avoids costly penalties. We assist with licensing, reporting, and developing robust internal compliance programs.
+                        </p>
+                         <p class="text-gray-600 text-base lg:text-lg leading-relaxed">
+                            We are your partners in maintaining the highest standards of ethical conduct.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="contract" class="grid md:grid-cols-2 gap-16 items-center pt-12 mb-24">
+                    <div class="md:order-2 gallery-image-wrapper">
+                        <img src="images/p8.jpg" alt="Contract Law" class="aspect-video rounded-lg">
+                    </div>
+                    <div class="md:order-1">
+                        <div class="flex items-center gap-4 md:gap-8 mb-6">
+                            <img src="images/rumdul kbach.png" alt="" class="w-10 h-10 md:w-12 md:h-12 khmer-pattern opacity-80">
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 font-heading">Contract Law</h2>
+                        </div>
+                        <p class="text-gray-600 text-base lg:text-lg leading-relaxed mb-6">
+                            Clear, enforceable contracts are the bedrock of any successful business. Our attorneys are meticulous in drafting, reviewing, and negotiating commercial agreements. We handle everything from shareholder and partnership agreements to distribution and licensing contracts.
+                        </p>
+                         <p class="text-gray-600 text-base lg:text-lg leading-relaxed">
+                            Our focus is on protecting your interests, minimizing risk, and ensuring your agreements are perfectly aligned with your business goals.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="real-estate" class="grid md:grid-cols-2 gap-16 items-center pt-12 mb-24">
+                    <div class="gallery-image-wrapper">
+                        <img src="images/p13.jpg" alt="Real Estate" class="aspect-video rounded-lg">
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-4 md:gap-8 mb-6">
+                            <img src="images/rumdul kbach.png" alt="" class="w-10 h-10 md:w-12 md:h-12 khmer-pattern opacity-80">
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 font-heading">Real Estate</h2>
+                        </div>
+                        <p class="text-gray-600 text-base lg:text-lg leading-relaxed mb-6">
+                            We provide comprehensive legal services for all aspects of real estate law in Cambodia. This includes acquisitions and dispositions, development, leasing, financing, and property dispute resolution. We guide our clients through complex zoning, titling, and regulatory hurdles.
+                        </p>
+                         <p class="text-gray-600 text-base lg:text-lg leading-relaxed">
+                           We ensure your property transactions are secure, compliant, and structured for success.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="employment" class="grid md:grid-cols-2 gap-16 items-center pt-12">
+                    <div class="md:order-2 gallery-image-wrapper">
+                        <img src="images/p14.jpg" alt="Employment" class="aspect-video rounded-lg">
+                    </div>
+                    <div class="md:order-1">
+                        <div class="flex items-center gap-4 md:gap-8 mb-6">
+                            <img src="images/rumdul kbach.png" alt="" class="w-10 h-10 md:w-12 md:h-12 khmer-pattern opacity-80">
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 font-heading">Employment</h2>
+                        </div>
+                        <p class="text-gray-600 text-base lg:text-lg leading-relaxed mb-6">
+                            Managing labor relations is essential for a stable and productive workforce. Our employment law team advises on workplace policies, employment contracts, labor disputes, and compliance with all relevant Cambodian labor laws.
+                        </p>
+                         <p class="text-gray-600 text-base lg:text-lg leading-relaxed">
+                           We help employers navigate employee rights, disciplinary actions, and terminations, protecting your business from potential disputes.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="py-20 relative overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center"
+                style="background-image: linear-gradient(rgba(30, 48, 62, 0.85), rgba(30, 48, 62, 0.85)), 
+                url('images/p3.jpg');">
+            </div>
+            <div class="absolute top-1/2 left-10 transform -translate-y-1/2 opacity-10">
+                <div class="w-40 h-40 text-white"><img src="images/Tep.png" alt=""></div>
+            </div>
+            <div class="absolute top-1/2 right-10 transform -translate-y-1/2 opacity-10">
+                <div class="w-40 h-40 text-white"><img src="images/Tep.png" alt=""></div>
+            </div>
+            <div class="relative z-10 container text-center text-white">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-6 font-heading">
+                    Let's Get Started. Contact Us Now<br>
+                    For A Complimentary Consultation
+                </h2>
+                <a href="contact.html" class="inline-block bg-white text-primary px-10 py-4 text-lg font-semibold rounded shadow-lg transition-all duration-300 hover:bg-gray-100 hover:-translate-y-0.5">
+                    Contact Us Now
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="contact" class="bg-primary text-white relative overflow-hidden">
+        <div class="absolute top-10 right-10 opacity-5">
+            <div class="w-64 h-64">
+                <img src="images/ROMDOL.png" alt="">
+            </div>
+        </div>
+
+        <div class="container py-12 relative z-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-start gap-3 mb-6">
+                        <svg class="w-5 h-5 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <div>
+                            <h3 class="font-bold mb-2 font-heading">Our Office</h3>
+                            <a href="http://googleusercontent.com/maps/google.com/1" class="text-gray-300 text-sm hover:text-white" target="_blank">
+                                <p class="text-gray-300 text-sm">
+                                Building #825, Floor 3A, Preah Monivong Boulevard, Deum Takov Commune, ChamkaMorn District, Phom Penh
+                            </p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-start gap-3 mb-6">
+                        <svg class="w-5 h-5 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <div>
+                            <h3 class="font-bold mb-2 font-heading">Email Us</h3>
+                            <a href="mailto:thhaknayandassociates@yahoo.com" class="text-gray-300 text-sm hover:text-white break-words">
+                                thhaknayandassociates@yahoo.com
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-start gap-3 mb-6">
+                        <svg class="w-5 h-5 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <div>
+                            <h3 class="font-bold mb-2 font-heading">Call Us</h3>
+                            <a href="tel:+85516827775" class="text-gray-300 text-sm hover:text-white block">
+                                +855(0) 16 827775
+                            </a>
+                            <a href="tel:+85561827775" class="text-gray-300 text-sm hover:text-white block">
+                                +855(0) 61 827775
+                            </a>
+                            <a href="tel:+85567877775" class="text-gray-300 text-sm hover:text-white block">
+                                +855(0) 67 877775
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-bold mb-4 font-heading">Follow Us</h3>
+                     <div class="flex gap-3">
+                        <a href="https://web.facebook.com/profile.php?id=100072000717096" class="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="Facebook">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg></a>
+                        
+                        <a href="https://web.facebook.com/profile.php?id=100072000717096" class="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="Facebook">
+                            <img src="images/ig.png" alt="instagram Icon" class="w-5 h-5">
+                        </a>
+
+                        <a href="https://web.facebook.com/profile.php?id=100072000717096" class="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="Facebook">
+                            <img src="images/telegram.png" alt="telegram Icon" class="w-5 h-5">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 pt-8 border-t border-white/20">
+                <div>
+                    <h2 class="text-2xl font-bold mb-4 flex items-center gap-2 font-heading">
+                        <div class="w-10 h-15">
+                            <img src="images/Tep.png" alt="">
+                        </div>
+                        THHAKNAY & ASSOCIATES
+                    </h2>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        A premier legal practice delivering comprehensive solutions to clients across diverse industries,
+                        with expertise spanning domestic and international transactions.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="font-bold mb-4 font-heading">Quick Links</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white">Home</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white">About Us</a></li>
+                        <li><a href="practice.html" class="text-gray-300 hover:text-white">Practice Areas</a></li>
+                        <li><a href="our-people.html" class="text-gray-300 hover:text-white">Our Team</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold mb-4 font-heading">Business Hours</h3>
+                    <p class="flex justify-between text-gray-300 text-sm mb-2">
+                        <span>Monday - Friday:</span>
+                        <span class="text-white">8:30 AM - 5:30 PM</span>
+                    </p>
+                    <p class="flex justify-between text-gray-300 text-sm mb-2">
+                        <span>Saturday:</span>
+                        <span class="text-white">9:00 AM - 12:00 PM</span>
+                    </p>
+                    <p class="flex justify-between text-gray-300 text-sm">
+                        <span>Sunday & Holidays:</span>
+                        <span class="text-white">Closed</span>
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="mt-8 pt-8 border-t border-white/20 text-center text-sm text-gray-300">
+                <p>© THHAKNAY & ASSOCIATES - 2025 - All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/practice.js"></script>
+    <script src="js/SmoothScroll.js"></script>
+
+</body>
+</html>
