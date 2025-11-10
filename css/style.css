@@ -27,38 +27,6 @@
 }
 
 
-/* --- REMOVED ---
- * These media queries were not being used by your HTML 
- * (which uses Tailwind classes) and they conflict with
- * Tailwind's mobile-first (min-width) approach.
- * All responsive typography is now handled in index.html
- * with Tailwind classes like md:text-lg, lg:text-xl, etc.
- */
-/*
-@media screen and (max-width: 1200px) { 
-  .nav-menu-link {
-    font-size: 16px; 
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  
-  .logo-text {
-    font-size: 22px;
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .nav-menu-link {
-    font-size: 15px;
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-  
-  .logo-text {
-    font-size: 20px;
-  }
-}
-*/
 
 /* Header Gradient Background */
 .bg-gold {
@@ -125,13 +93,6 @@ section {
     );
 }
 
-/* REMOVED - This class is no longer used */
-/*
-.kbach-khmer-png {
-    width: 50px;
-    height: 50px;
-}
-*/
 
 /* Card Hover Effects */
 .practice-card {
@@ -158,18 +119,6 @@ section {
     transform: scale(1.05);
 }
 
-/* *** REMOVED Conflicting Responsive Typography *** */
-/* This block conflicted with Tailwind's responsive font classes
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    h2 {
-        font-size: 2rem;
-    }
-}
-*/
 
 /* Section Divider with Khmer Pattern */
 .section-divider {
@@ -199,4 +148,44 @@ section {
 
 .section-divider::after {
     right: 10%;
+}
+
+/* === ADDED FOR SWAPPABLE CAROUSEL === */
+#team-carousel-track {
+    cursor: grab;
+}
+
+#team-carousel-track:active {
+    cursor: grabbing;
+}
+
+
+/* === NEW "MAJESTIC GALLERY" STYLES === */
+.gallery-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+    transition: all 0.3s ease-in-out;
+}
+
+.gallery-image-wrapper img {
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-image-wrapper:hover {
+    /* The "lift up" effect */
+    transform: translateY(-0.5rem) scale(1.05);
+    
+    /* The "Majestic Gold Glow" - #D1B464 at 70% opacity */
+    box-shadow: 0 10px 30px -5px rgba(209, 180, 100, 0.7); 
+}
+
+/* Re-usable class for the partner frame hover */
+.hover\:shadow-gold-glow:hover {
+    /* #D1B464 at 70% opacity */
+    box-shadow: 0 10px 30px -5px rgba(209, 180, 100, 0.7);
 }

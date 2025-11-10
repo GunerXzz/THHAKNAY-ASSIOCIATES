@@ -100,8 +100,17 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (window.pageYOffset > 50) {
             header.classList.add('shadow-lg', 'bg-white');
-            if(logoLink) logoLink.classList.add('text-primary');
-            if(mobileBtn) mobileBtn.classList.add('text-primary');
+            
+            if(logoLink) {
+                logoLink.classList.remove('text-white'); 
+                logoLink.classList.add('text-primary'); 
+            }
+            
+            // *** MOBILE BUTTON COLOR FIX (RE-APPLIED) ***
+            if(mobileBtn) {
+                mobileBtn.classList.remove('text-white'); // Explicitly remove white
+                mobileBtn.classList.add('text-primary');    // Add blue
+            }
             if(langBtn) {
                 langBtn.classList.remove('bg-gold', 'text-primary');
                 langBtn.classList.add('bg-primary', 'text-white');
@@ -114,8 +123,17 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         } else {
             header.classList.remove('shadow-lg', 'bg-white');
-            if(logoLink) logoLink.classList.remove('text-primary');
-            if(mobileBtn) mobileBtn.classList.remove('text-primary');
+            
+            if(logoLink) {
+                logoLink.classList.remove('text-primary'); 
+                logoLink.classList.add('text-white'); 
+            }
+            
+            // *** MOBILE BUTTON COLOR FIX (RE-APPLIED) ***
+            if(mobileBtn) {
+                mobileBtn.classList.remove('text-primary'); // Remove blue
+                mobileBtn.classList.add('text-white');      // Add white
+            }
             if(langBtn) {
                 langBtn.classList.remove('bg-primary', 'text-white');
                 langBtn.classList.add('bg-gold', 'text-primary');
@@ -130,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // --- Newsletter Form Validation (Now Footer Business Hours) ---
-    // This is no longer in use, but we'll leave the function here
     function isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
@@ -143,7 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const scrolled = window.pageYOffset;
             const heroBackground = hero.querySelector('.absolute.inset-0');
             if (heroBackground) {
-                // Check for a second background image (parallax)
                 if(heroBackground.style.backgroundImage.includes('url(')) {
                     heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
                 }
@@ -162,7 +178,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const totalSlides = slides.length;
         
         let currentIndex = 0;
-        let autoSwapTimer = setInterval(slideNext, 5000); // Auto-swap every 5 seconds
+        // === SPEED CHANGED TO 3 SECONDS ===
+        let autoSwapTimer = setInterval(slideNext, 3000); 
+
+        // === SWIPE FUNCTIONALITY VARIABLES (RE-APPLIED) ===
+        let touchStartX = 0;
+        let touchEndX = 0;
 
         function getItemsToShow() {
             if (window.innerWidth >= 1024) {
@@ -225,7 +246,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function resetAutoSwap() {
             clearInterval(autoSwapTimer);
-            autoSwapTimer = setInterval(slideNext, 5000);
+            // === SPEED CHANGED TO 3 SECONDS ===
+            autoSwapTimer = setInterval(slideNext, 3000);
+        }
+
+        // === SWIPE GESTURE HANDLER (RE-APPLIED) ===
+        function handleSwipeGesture() {
+            // Check if swipe is significant (e.g., > 50px)
+            if (touchEndX < touchStartX - 50) { 
+                slideNext();
+                resetAutoSwap();
+            }
+            if (touchEndX > touchStartX + 50) {
+                slidePrev();
+                resetAutoSwap();
+            }
         }
 
         if(nextBtn) {
@@ -249,6 +284,16 @@ document.addEventListener('DOMContentLoaded', function() {
             track.parentElement.addEventListener('mouseleave', () => {
                 resetAutoSwap();
             });
+
+            // === ADD TOUCH EVENT LISTENERS (RE-APPLIED) ===
+            track.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true }); // Use passive for better scroll performance
+
+            track.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipeGesture();
+            });
         }
         
         window.addEventListener('resize', updateCarousel);
@@ -256,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     initTeamCarousel(); // Run the carousel function
 
-    // *** NEW: Language Dropdown Toggle ***
+    // --- Language Dropdown Toggle ---
     function initLanguageToggle() {
         const toggleBtn = document.getElementById('language-toggle-btn');
         const menu = document.getElementById('language-menu');

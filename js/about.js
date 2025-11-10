@@ -34,24 +34,40 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (window.pageYOffset > 50) {
             header.classList.add('shadow-lg', 'bg-white');
-            if (logoLink) logoLink.classList.add('text-primary');
-            if (mobileBtn) mobileBtn.classList.add('text-primary');
+            
+            if (logoLink) {
+                logoLink.classList.remove('text-white'); 
+                logoLink.classList.add('text-primary'); 
+            }
+
+            if (mobileBtn) {
+                mobileBtn.classList.remove('text-white'); 
+                mobileBtn.classList.add('text-primary');
+            }
             if(langBtn) {
                 langBtn.classList.remove('bg-gold', 'text-primary');
                 langBtn.classList.add('bg-primary', 'text-white');
             }
             navLinks.forEach(link => {
                 link.classList.remove('text-white');
-                if (!link.classList.contains('border-gold')) { // Don't change active link color
+                if (!link.classList.contains('border-gold')) { 
                     link.classList.add('text-gray-700');
                 } else {
-                    link.classList.add('text-primary'); // Make active link dark
+                    link.classList.add('text-primary'); 
                 }
             });
         } else {
             header.classList.remove('shadow-lg', 'bg-white');
-            if (logoLink) logoLink.classList.remove('text-primary');
-            if (mobileBtn) mobileBtn.classList.remove('text-primary');
+
+            if (logoLink) {
+                logoLink.classList.remove('text-primary'); 
+                logoLink.classList.add('text-white'); 
+            }
+            
+            if (mobileBtn) {
+                mobileBtn.classList.remove('text-primary'); 
+                mobileBtn.classList.add('text-white');
+            }
             if(langBtn) {
                 langBtn.classList.remove('bg-primary', 'text-white');
                 langBtn.classList.add('bg-gold', 'text-primary');
@@ -64,13 +80,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // --- Newsletter Form Validation (Now Footer Business Hours) ---
-    // This is no longer in use, but we'll leave the function here
     function isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
     
-    // *** NEW: Language Dropdown Toggle ***
+    // --- Language Dropdown Toggle ---
     function initLanguageToggle() {
         const toggleBtn = document.getElementById('language-toggle-btn');
         const menu = document.getElementById('language-menu');
@@ -92,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     initLanguageToggle(); // Run the language toggle function
+    
 
     // --- Console Greeting ---
     console.log('%c THHANKNAY & ASSOCIATES ', 'background: #1e303e; color: white; font-size: 20px; padding: 10px;');
