@@ -103,25 +103,35 @@
 
     <main>
 
-        <section class="relative bg-primary py-32 text-white overflow-hidden pt-48"> 
-            <div class="absolute inset-0 bg-cover bg-center"
-                 style="background-image: linear-gradient(rgba(30, 48, 62, 0.8), rgba(30, 48, 62, 0.8)), 
-                 url('images/p10.jpg'); filter: blur(2px);">
-            </div>
-            <div class="absolute top-1/2 left-10 transform -translate-y-1/2 opacity-10">
-                <div class="w-40 h-40 text-white">
-                    <img src="images/Tep.png" alt="">
+        <section id="hero-slider" class="relative h-[70vh] flex items-center justify-center overflow-hidden">
+            
+            <div class="absolute inset-0 w-full h-full">
+                <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0"
+                     style="background-image: linear-gradient(rgba(30, 48, 62, 0.7), rgba(30, 48, 62, 0.7)), url('images/p21.jpg');">
+                </div>
+                <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0"
+                     style="background-image: linear-gradient(rgba(30, 48, 62, 0.7), rgba(30, 48, 62, 0.7)), url('images/p24.jpg');">
+                </div>
+                <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0"
+                     style="background-image: linear-gradient(rgba(30, 48, 62, 0.7), rgba(30, 48, 62, 0.7)), url('images/p11.jpg');">
                 </div>
             </div>
-
-            <div class="container relative z-10 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold font-heading mb-4">Practice Areas</h1>
+    
+            <div class="absolute top-10 left-10 opacity-20 z-30">
+                <div class="w-32 h-32 text-white khmer-pattern">
+                    <img src="images/rumdul kbach.png" alt=""> </div>
+            </div>
+            <div class="absolute bottom-10 right-10 opacity-20 z-30">
+                 <div class="w-32 h-32 text-white khmer-pattern">
+                    <img src="images/rumdul kbach.png" alt=""> </div>
+            </div>
+    
+            <div class="container relative z-40 text-center text-white pt-16"> <h1 class="text-4xl md:text-6xl font-bold font-heading mb-4">Practice Areas</h1>
                 <p class="text-lg text-gold font-semibold">
                     <a href="index.html" class="hover:text-white">Home</a> / <span class="text-white">Practice Areas</span>
                 </p>
             </div>
         </section>
-
         <nav class="sticky top-16 bg-white shadow-md z-30">
             <div class="container">
                 <div class="flex flex-wrap justify-center gap-x-4 md:gap-x-8">
@@ -323,8 +333,8 @@
                             <a href="tel:+85561827775" class="text-gray-300 text-sm hover:text-white block">
                                 +855(0) 61 827775
                             </a>
-                            <a href="tel:+85567877775" class="text-gray-300 text-sm hover:text-white block">
-                                +855(0) 67 877775
+                            <a href="tel:+8556787775" class="text-gray-300 text-sm hover:text-white block">
+                                +855(0) 67 87775
                             </a>
                         </div>
                     </div>
@@ -338,11 +348,11 @@
                                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                             </svg></a>
                         
-                        <a href="https://web.facebook.com/profile.php?id=100072000717096" class="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="Facebook">
+                        <a href="https://www.instagram.com/thhaknay_and_associates/" class="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="Instagram" target="blank">
                             <img src="images/ig.png" alt="instagram Icon" class="w-5 h-5">
                         </a>
 
-                        <a href="https://web.facebook.com/profile.php?id=100072000717096" class="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="Facebook">
+                        <a href="https://t.me/+85567877775" class="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="Telegram" target="blank">
                             <img src="images/telegram.png" alt="telegram Icon" class="w-5 h-5">
                         </a>
                     </div>
@@ -369,7 +379,7 @@
                         <li><a href="index.html" class="text-gray-300 hover:text-white">Home</a></li>
                         <li><a href="about.html" class="text-gray-300 hover:text-white">About Us</a></li>
                         <li><a href="practice.html" class="text-gray-300 hover:text-white">Practice Areas</a></li>
-                        <li><a href="our-people.html" class="text-gray-300 hover:text-white">Our Team</a></li>
+                        <li><a href="our-people.html" class="text-gray-300 hover:text-white">Our People</a></li>
                         <li><a href="contact.html" class="text-gray-300 hover:text-white">Contact</a></li>
                     </ul>
                 </div>
@@ -378,7 +388,7 @@
                     <h3 class="font-bold mb-4 font-heading">Business Hours</h3>
                     <p class="flex justify-between text-gray-300 text-sm mb-2">
                         <span>Monday - Friday:</span>
-                        <span class="text-white">8:30 AM - 5:30 PM</span>
+                        <span class="text-white">9:00 AM - 5:30 PM</span>
                     </p>
                     <p class="flex justify-between text-gray-300 text-sm mb-2">
                         <span>Saturday:</span>
@@ -398,6 +408,7 @@
         </div>
     </footer>
 
+    <script src="js/global.js"></script>
     <script src="js/practice.js"></script>
     <script src="js/SmoothScroll.js"></script>
 

@@ -26,8 +26,6 @@
     }
 }
 
-
-
 /* Header Gradient Background */
 .bg-gold {
     background: #D1B464;
@@ -39,9 +37,10 @@
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
-/* Changed to a more subtle animation */
+/* === UPDATED ANIMATION === */
+/* Now uses spin-slow animation */
 .khmer-pattern {
-    animation: pulse-glow 6s ease-in-out infinite;
+    animation: spin-slow 20s linear infinite;
 }
 
 .khmer-accent {
@@ -161,24 +160,31 @@ section {
 
 
 /* === NEW "MAJESTIC GALLERY" STYLES === */
+/* Base wrapper for any image we want to have the hover effect */
 .gallery-image-wrapper {
     position: relative;
     overflow: hidden;
     border-radius: 0.5rem; /* rounded-lg */
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
     transition: all 0.3s ease-in-out;
+    width: 100%;
+    /* Use auto height to hug the image content */
+    height: auto; 
+    background: transparent; /* Ensure no white box behind */
 }
 
 .gallery-image-wrapper img {
     transition: transform 0.3s ease-in-out;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto; /* Allow height to adjust naturally based on width */
+    object-fit: cover; 
+    display: block; /* Removes bottom margin/gap */
 }
 
 .gallery-image-wrapper:hover {
     /* The "lift up" effect */
-    transform: translateY(-0.5rem) scale(1.05);
+    transform: translateY(-0.5rem) scale(1.02);
+    z-index: 10;
     
     /* The "Majestic Gold Glow" - #D1B464 at 70% opacity */
     box-shadow: 0 10px 30px -5px rgba(209, 180, 100, 0.7); 
@@ -188,4 +194,133 @@ section {
 .hover\:shadow-gold-glow:hover {
     /* #D1B464 at 70% opacity */
     box-shadow: 0 10px 30px -5px rgba(209, 180, 100, 0.7);
+}
+
+/* === NEW GALLERY SLIDER STYLES (NATURAL & RESPONSIVE) === */
+.gallery-slider-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;    
+    overflow: hidden;
+    padding-bottom: 3rem; /* Space for dots */
+}
+
+/* The track holds all the slides */
+.gallery-slider-track {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); 
+    /* Ensure track height hugs the tallest slide, or use items-start to align top */
+    align-items: flex-start;
+}
+
+/* Each slide group */
+.gallery-slide-group {
+    /* Flex-basis 100% ensures one slide takes full width */
+    flex: 0 0 100%;
+    min-width: 100%;
+    width: 100%; 
+    padding: 0 4px; 
+    box-sizing: border-box;
+}
+
+/* The Grid Layout */
+.gallery-grid {
+    display: grid;
+    width: 100%; 
+    gap: 1.5rem; 
+    /* No fixed rows, let content define height */
+    grid-template-rows: auto; 
+    /* Center items vertically so gaps are distributed, not just white space at bottom */
+    align-items: center;
+    
+    /* Desktop: 3 columns */
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Tablet Breakpoint (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr); /* Switch to 2 columns */
+        gap: 1rem;
+    }
+}
+
+/* Mobile Breakpoint (max-width: 640px) */
+@media (max-width: 640px) {
+    .gallery-grid {
+        /* Keep 2 columns on mobile */
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 0.75rem;
+    }
+}
+
+/* Dots */
+.gallery-slider-dots {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 10px 0;
+}
+
+.gallery-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #cbd5e1; 
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery-dot.active {
+    background-color: #D1B464; 
+    transform: scale(1.3);
+}
+
+/* Navigation Arrows */
+.gallery-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    color: #1e303e;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 20;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #f3f4f6;
+}
+.gallery-nav-btn:hover {
+    background-color: #D1B464;
+    color: white;
+    border-color: #D1B464;
+}
+.gallery-prev { left: 0; }
+.gallery-next { right: 0; }
+
+/* On mobile, move arrows to be less intrusive */
+@media (max-width: 640px) {
+    .gallery-nav-btn {
+        width: 36px;
+        height: 36px;
+        /* Position them at the bottom sides instead of middle of image */
+        top: auto;
+        bottom: 0px; 
+        transform: none;
+    }
+    .gallery-prev { left: 20px; }
+    .gallery-next { right: 20px; }
 }

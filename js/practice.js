@@ -1,108 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    // --- Mobile Menu Toggle ---
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
-            const isHidden = mobileMenu.classList.toggle('hidden');
-            mobileMenuBtn.setAttribute('aria-expanded', !isHidden);
-        });
-
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                // Only close if it's not a link to another page
-                if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').includes('index.html#')) {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                }
-            });
-        });
-    }
-
-    // --- Header Style on Scroll ---
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (!header) return; // Exit if header not found
-
-        const logoLink = header.querySelector('a.font-bold');
-        const navLinks = header.querySelectorAll('nav.hidden a:not(.bg-gold)');
-        const mobileBtn = document.getElementById('mobile-menu-btn');
-        const langBtn = document.getElementById('language-toggle-btn');
-        
-        if (window.pageYOffset > 50) {
-            header.classList.add('shadow-lg', 'bg-white');
-            
-            if (logoLink) {
-                logoLink.classList.remove('text-white'); 
-                logoLink.classList.add('text-primary'); 
-            }
-
-            if (mobileBtn) {
-                mobileBtn.classList.remove('text-white'); 
-                mobileBtn.classList.add('text-primary');
-            }
-            if(langBtn) {
-                langBtn.classList.remove('bg-gold', 'text-primary');
-                langBtn.classList.add('bg-primary', 'text-white');
-            }
-            navLinks.forEach(link => {
-                link.classList.remove('text-white');
-                if (!link.classList.contains('border-gold')) { // Don't change active link color
-                    link.classList.add('text-gray-700');
-                } else {
-                    link.classList.add('text-primary'); // Make active link dark
-                }
-            });
-        } else {
-            header.classList.remove('shadow-lg', 'bg-white');
-
-            if (logoLink) {
-                logoLink.classList.remove('text-primary'); 
-                logoLink.classList.add('text-white'); 
-            }
-            
-            if (mobileBtn) {
-                mobileBtn.classList.remove('text-primary'); 
-                mobileBtn.classList.add('text-white');
-            }
-            if(langBtn) {
-                langBtn.classList.remove('bg-primary', 'text-white');
-                langBtn.classList.add('bg-gold', 'text-primary');
-            }
-            navLinks.forEach(link => {
-                link.classList.remove('text-gray-700', 'text-primary');
-                link.classList.add('text-white');
-            });
-        }
-    });
-    
-    // --- Language Dropdown Toggle ---
-    function initLanguageToggle() {
-        const toggleBtn = document.getElementById('language-toggle-btn');
-        const menu = document.getElementById('language-menu');
-        
-        if (!toggleBtn || !menu) return; // Exit if elements not found
-
-        toggleBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent window listener from closing it immediately
-            menu.classList.toggle('hidden');
-        });
-        
-        // Close dropdown if clicking outside
-        window.addEventListener('click', (e) => {
-            if (menu.classList.contains('hidden')) return; // Don't do anything if hidden
-            
-            if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
-                menu.classList.add('hidden');
-            }
-        });
-    }
-    initLanguageToggle(); // Run the language toggle function
-
-    // --- NEW: Smooth Scroll for Quick Nav ---
+    // --- Smooth Scroll for Quick Nav ---
     document.querySelectorAll('a.quick-nav-link').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -121,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- NEW: Active Link Highlighting for Quick Nav ---
+    // --- Active Link Highlighting for Quick Nav ---
     window.addEventListener('scroll', function() {
         const sections = document.querySelectorAll('.practice-area-showcase > div[id]');
         const quickNavLinks = document.querySelectorAll('a.quick-nav-link');
@@ -150,6 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // --- Console Greeting ---
-    console.log('%c THHANKNAY & ASSOCIATES ', 'background: #1e303e; color: white; font-size: 20px; padding: 10px;');
-    console.log('%c Legal Excellence Since 2021 ', 'background: #2a4456; color: white; font-size: 14px; padding: 5px;');
+    console.log('%c Practice Areas Script Loaded ', 'background: #D1B464; color: #1e303e; font-size: 14px; padding: 5px;');
+
 });
