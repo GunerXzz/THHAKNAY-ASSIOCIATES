@@ -40,15 +40,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // --- Active Links & Header Style on Scroll (Global) ---
-    // This function handles both the header style change (transparent-to-white)
-    // and the active link highlighting for the main nav.
     window.addEventListener('scroll', function() {
         const sections = document.querySelectorAll('section[id]');
-        const scrollPosition = window.pageYOffset + 80; // 64px header + 16px buffer
+        const scrollPosition = window.pageYOffset + 80; 
         const header = document.querySelector('header');
         if (!header) return;
 
-        // Active link styling (will only work on homepage, which is correct)
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
@@ -71,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Transparent-to-Solid Header (will work on all pages)
         const logoLink = header.querySelector('a.font-bold');
         const navLinks = header.querySelectorAll('nav.hidden a:not(.bg-gold)');
         const mobileBtn = document.getElementById('mobile-menu-btn');
@@ -79,45 +75,18 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (window.pageYOffset > 50) {
             header.classList.add('shadow-lg', 'bg-white');
-            
-            if(logoLink) {
-                logoLink.classList.remove('text-white'); 
-                logoLink.classList.add('text-primary'); 
-            }
-            
-            if(mobileBtn) {
-                mobileBtn.classList.remove('text-white'); 
-                mobileBtn.classList.add('text-primary');
-            }
-            if(langBtn) {
-                langBtn.classList.remove('bg-gold', 'text-primary');
-                langBtn.classList.add('bg-primary', 'text-white');
-            }
+            if(logoLink) { logoLink.classList.remove('text-white'); logoLink.classList.add('text-primary'); }
+            if(mobileBtn) { mobileBtn.classList.remove('text-white'); mobileBtn.classList.add('text-primary'); }
+            if(langBtn) { langBtn.classList.remove('bg-gold', 'text-primary'); langBtn.classList.add('bg-primary', 'text-white'); }
             navLinks.forEach(link => {
                 link.classList.remove('text-white');
-                // Check if it's the active link (border-gold)
-                if (link.classList.contains('border-gold')) {
-                    link.classList.add('text-primary');
-                } else {
-                    link.classList.add('text-gray-700');
-                }
+                if (link.classList.contains('border-gold')) { link.classList.add('text-primary'); } else { link.classList.add('text-gray-700'); }
             });
         } else {
             header.classList.remove('shadow-lg', 'bg-white');
-            
-            if(logoLink) {
-                logoLink.classList.remove('text-primary'); 
-                logoLink.classList.add('text-white'); 
-            }
-            
-            if(mobileBtn) {
-                mobileBtn.classList.remove('text-primary'); 
-                mobileBtn.classList.add('text-white');
-            }
-            if(langBtn) {
-                langBtn.classList.remove('bg-primary', 'text-white');
-                langBtn.classList.add('bg-gold', 'text-primary');
-            }
+            if(logoLink) { logoLink.classList.remove('text-primary'); logoLink.classList.add('text-white'); }
+            if(mobileBtn) { mobileBtn.classList.remove('text-primary'); mobileBtn.classList.add('text-white'); }
+            if(langBtn) { langBtn.classList.remove('bg-primary', 'text-white'); langBtn.classList.add('bg-gold', 'text-primary'); }
             navLinks.forEach(link => {
                 link.classList.remove('text-gray-700', 'text-primary');
                 link.classList.add('text-white');
@@ -125,10 +94,118 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // --- Book Carousel Logic (3D Cover Flow) ---
+    function init3DCoverFlow() {
+        const track = document.getElementById('book-track-3d');
+        if (!track) return;
+
+        const prevBtn = document.querySelector('.book-prev');
+        const nextBtn = document.querySelector('.book-next');
+        const items = Array.from(document.querySelectorAll('.book-slide-item-3d'));
+        const totalItems = items.length;
+        
+        let currentIndex = 0; // Start with the first item as center
+        let autoSlideInterval;
+        const autoSlideDelay = 3000; // 3 seconds
+
+        function updateCarousel() {
+            items.forEach((item, index) => {
+                // Reset basic styles
+                item.className = 'book-slide-item-3d'; // Reset classes
+                item.style.opacity = ''; // Allow CSS opacity to take over or be overridden
+                item.style.transform = '';
+                item.style.zIndex = '';
+                item.style.pointerEvents = '';
+
+                // Calculate relative offset
+                let offset = index - currentIndex;
+                
+                // Infinite loop wrapping logic for visual positioning
+                if (offset > totalItems / 2) offset -= totalItems;
+                if (offset < -totalItems / 2) offset += totalItems;
+
+                // Assign classes based on offset
+                if (offset === 0) {
+                    item.classList.add('active');
+                } else if (offset === -1) {
+                    item.classList.add('prev-1');
+                } else if (offset === -2) {
+                    item.classList.add('prev-2');
+                } else if (offset === 1) {
+                    item.classList.add('next-1');
+                } else if (offset === 2) {
+                    item.classList.add('next-2');
+                } else {
+                    // Hide others
+                    item.classList.add('hidden-item');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalItems;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+            updateCarousel();
+        }
+
+        function startAutoSlide() {
+            stopAutoSlide();
+            autoSlideInterval = setInterval(nextSlide, autoSlideDelay);
+        }
+
+        function stopAutoSlide() {
+            if (autoSlideInterval) clearInterval(autoSlideInterval);
+        }
+
+        // Event Listeners for Buttons
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                stopAutoSlide();
+                // Restart after interaction?
+                // setTimeout(startAutoSlide, 5000); 
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                stopAutoSlide();
+            });
+        }
+
+        // Click to center
+        items.forEach((item, index) => {
+            item.addEventListener('click', function(e) {
+                if (this.classList.contains('active')) return; // Let default link work
+                e.preventDefault();
+                // Calculate shortest path to this index
+                // Simple method: set index directly
+                currentIndex = index;
+                updateCarousel();
+                stopAutoSlide();
+            });
+        });
+
+        // Hover to pause
+        track.parentElement.addEventListener('mouseenter', stopAutoSlide);
+        track.parentElement.addEventListener('mouseleave', startAutoSlide);
+
+        // Initialize
+        updateCarousel();
+        startAutoSlide();
+    }
+    init3DCoverFlow();
+
+
     // --- Team Carousel Logic (Global) ---
     function initTeamCarousel() {
         const track = document.getElementById('team-carousel-track');
-        if (!track) return; // Exit if carousel isn't on the page
+        if (!track) return; 
 
         const prevBtn = document.getElementById('team-prev-btn');
         const nextBtn = document.getElementById('team-next-btn');
@@ -142,26 +219,18 @@ document.addEventListener('DOMContentLoaded', function() {
         let touchEndX = 0;
 
         function getItemsToShow() {
-            if (window.innerWidth >= 1024) {
-                return 4; // 4 items on lg and up
-            } else if (window.innerWidth >= 768) {
-                return 3; // 3 items on md (tablet)
-            } else if (window.innerWidth >= 640) {
-                return 2; // 2 items on sm
-            }
-            return 1; // 1 item on xs (mobile)
+            if (window.innerWidth >= 1024) { return 4; } 
+            else if (window.innerWidth >= 768) { return 3; } 
+            else if (window.innerWidth >= 640) { return 2; }
+            return 1; 
         }
 
         function updateCarousel() {
             const itemsToShow = getItemsToShow();
             const maxIndex = totalSlides - itemsToShow;
             
-            if (currentIndex > maxIndex) {
-                currentIndex = maxIndex;
-            }
-            if (currentIndex < 0) {
-                currentIndex = 0;
-            }
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+            if (currentIndex < 0) currentIndex = 0;
             
             const itemWidthPercentage = 100 / itemsToShow;
             if (track) {
@@ -170,8 +239,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             slides.forEach(slide => {
                 slide.style.width = `${itemWidthPercentage}%`;
-                slide.style.paddingLeft = '1rem'; // px-4
-                slide.style.paddingRight = '1rem'; // px-4
+                slide.style.paddingLeft = '1rem'; 
+                slide.style.paddingRight = '1rem'; 
             });
 
             if (prevBtn) prevBtn.disabled = currentIndex === 0;
@@ -181,22 +250,14 @@ document.addEventListener('DOMContentLoaded', function() {
         function slideNext() {
             const itemsToShow = getItemsToShow();
             const maxIndex = totalSlides - itemsToShow;
-            if (currentIndex < maxIndex) {
-                currentIndex++;
-            } else {
-                currentIndex = 0; // Loop back to start
-            }
+            if (currentIndex < maxIndex) { currentIndex++; } else { currentIndex = 0; }
             updateCarousel();
         }
 
         function slidePrev() {
             const itemsToShow = getItemsToShow();
             const maxIndex = totalSlides - itemsToShow;
-            if (currentIndex > 0) {
-                currentIndex--;
-            } else {
-                currentIndex = maxIndex; // Loop to end
-            }
+            if (currentIndex > 0) { currentIndex--; } else { currentIndex = maxIndex; }
             updateCarousel();
         }
 
@@ -206,59 +267,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function handleSwipeGesture() {
-            if (touchEndX < touchStartX - 50) { 
-                slideNext();
-                resetAutoSwap();
-            }
-            if (touchEndX > touchStartX + 50) {
-                slidePrev();
-                resetAutoSwap();
-            }
+            if (touchEndX < touchStartX - 50) { slideNext(); resetAutoSwap(); }
+            if (touchEndX > touchStartX + 50) { slidePrev(); resetAutoSwap(); }
         }
 
-        if(nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                slideNext();
-                resetAutoSwap();
-            });
-        }
-        
-        if(prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                slidePrev();
-                resetAutoSwap();
-            });
-        }
+        if(nextBtn) { nextBtn.addEventListener('click', () => { slideNext(); resetAutoSwap(); }); }
+        if(prevBtn) { prevBtn.addEventListener('click', () => { slidePrev(); resetAutoSwap(); }); }
 
         if(track && track.parentElement) {
-            track.parentElement.addEventListener('mouseenter', () => {
-                clearInterval(autoSwapTimer);
-            });
-            track.parentElement.addEventListener('mouseleave', () => {
-                resetAutoSwap();
-            });
-
-            track.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true }); 
-
-            track.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipeGesture();
-            });
+            track.parentElement.addEventListener('mouseenter', () => { clearInterval(autoSwapTimer); });
+            track.parentElement.addEventListener('mouseleave', () => { resetAutoSwap(); });
+            track.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true }); 
+            track.addEventListener('touchend', (e) => { touchEndX = e.changedTouches[0].screenX; handleSwipeGesture(); });
         }
         
         window.addEventListener('resize', updateCarousel);
         updateCarousel();
     }
-    initTeamCarousel(); // Run the carousel function
+    initTeamCarousel(); 
 
     // === NEW: GALLERY SLIDER LOGIC (2x3 Grid) ===
-    // This looks for any element with class "gallery-slider-container"
-    // and initializes a slider inside it.
     function initGallerySliders() {
         const sliders = document.querySelectorAll('.gallery-slider-container');
-        
         sliders.forEach(container => {
             const track = container.querySelector('.gallery-slider-track');
             const slides = container.querySelectorAll('.gallery-slide-group');
@@ -269,19 +299,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!track || slides.length === 0) return;
 
             let currentIndex = 0;
-            const slideInterval = 3500; // 3.5 seconds
+            const slideInterval = 3500; 
             let autoSlideTimer;
 
-            // Create Dots
             if (dotsContainer) {
                 slides.forEach((_, index) => {
                     const dot = document.createElement('button');
                     dot.classList.add('gallery-dot');
                     if (index === 0) dot.classList.add('active');
-                    dot.addEventListener('click', () => {
-                        goToSlide(index);
-                        resetTimer();
-                    });
+                    dot.addEventListener('click', () => { goToSlide(index); resetTimer(); });
                     dotsContainer.appendChild(dot);
                 });
             }
@@ -290,89 +316,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(!dotsContainer) return;
                 const dots = dotsContainer.querySelectorAll('.gallery-dot');
                 dots.forEach((dot, index) => {
-                    if (index === currentIndex) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
+                    if (index === currentIndex) { dot.classList.add('active'); } else { dot.classList.remove('active'); }
                 });
             }
 
             function goToSlide(index) {
-                if (index < 0) {
-                    currentIndex = slides.length - 1;
-                } else if (index >= slides.length) {
-                    currentIndex = 0;
-                } else {
-                    currentIndex = index;
-                }
-                
+                if (index < 0) { currentIndex = slides.length - 1; } 
+                else if (index >= slides.length) { currentIndex = 0; } 
+                else { currentIndex = index; }
                 track.style.transform = `translateX(-${currentIndex * 100}%)`;
                 updateDots();
             }
 
-            function nextSlide() {
-                goToSlide(currentIndex + 1);
-            }
+            function nextSlide() { goToSlide(currentIndex + 1); }
+            function prevSlide() { goToSlide(currentIndex - 1); }
+            function resetTimer() { clearInterval(autoSlideTimer); autoSlideTimer = setInterval(nextSlide, slideInterval); }
 
-            function prevSlide() {
-                goToSlide(currentIndex - 1);
-            }
+            if (prevBtn) { prevBtn.addEventListener('click', () => { prevSlide(); resetTimer(); }); }
+            if (nextBtn) { nextBtn.addEventListener('click', () => { nextSlide(); resetTimer(); }); }
 
-            function resetTimer() {
-                clearInterval(autoSlideTimer);
-                autoSlideTimer = setInterval(nextSlide, slideInterval);
-            }
-
-            // Event Listeners
-            if (prevBtn) {
-                prevBtn.addEventListener('click', () => {
-                    prevSlide();
-                    resetTimer();
-                });
-            }
-            if (nextBtn) {
-                nextBtn.addEventListener('click', () => {
-                    nextSlide();
-                    resetTimer();
-                });
-            }
-
-            // Start Auto Slide
             resetTimer();
-            
-            // Pause on hover
             container.addEventListener('mouseenter', () => clearInterval(autoSlideTimer));
             container.addEventListener('mouseleave', resetTimer);
         });
     }
-    initGallerySliders(); // Initialize all gallery sliders on the page
-
+    initGallerySliders(); 
 
     // --- Language Dropdown Toggle (Global) ---
     function initLanguageToggle() {
         const toggleBtn = document.getElementById('language-toggle-btn');
         const menu = document.getElementById('language-menu');
-        
-        if (!toggleBtn || !menu) return; // Exit if elements not found
-
-        toggleBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent window listener from closing it immediately
-            menu.classList.toggle('hidden');
-        });
-        
-        // Close dropdown if clicking outside
-        window.addEventListener('click', (e) => {
-            if (menu.classList.contains('hidden')) return; // Don't do anything if hidden
-            
-            if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
-                menu.classList.add('hidden');
-            }
-        });
+        if (!toggleBtn || !menu) return; 
+        toggleBtn.addEventListener('click', (e) => { e.stopPropagation(); menu.classList.toggle('hidden'); });
+        window.addEventListener('click', (e) => { if (menu.classList.contains('hidden')) return; if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) { menu.classList.add('hidden'); } });
     }
-    initLanguageToggle(); // Run the language toggle function
+    initLanguageToggle(); 
     
-
     // === HERO SLIDER LOGIC (Global) ===
     function initHeroSlider() {
         const slides = document.querySelectorAll('.hero-slide');
@@ -380,49 +359,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let currentSlide = 0;
         const slideDuration = 3000;
-        const fadeDuration = 1000; // This must match duration-1000 in HTML
+        const fadeDuration = 1000; 
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
-                // Set z-index: new slide on top, old slide below, others at bottom
-                if (i === index) {
-                    slide.style.zIndex = '20';
-                } else if (i === currentSlide) {
-                    slide.style.zIndex = '10';
-                } else {
-                    slide.style.zIndex = '0';
-                }
-
-                // Fade in the new slide
-                if (i === index) {
-                    slide.style.opacity = '1';
-                }
+                if (i === index) { slide.style.zIndex = '20'; } else if (i === currentSlide) { slide.style.zIndex = '10'; } else { slide.style.zIndex = '0'; }
+                if (i === index) { slide.style.opacity = '1'; }
             });
-
-            // After the fade-in is complete, hide the old slide
-            setTimeout(() => {
-                // Only hide the *previous* slide
-                if (currentSlide !== index) {
-                    slides[currentSlide].style.opacity = '0';
-                }
-                currentSlide = index; // Update the current slide index
-            }, fadeDuration);
+            setTimeout(() => { if (currentSlide !== index) { slides[currentSlide].style.opacity = '0'; } currentSlide = index; }, fadeDuration);
         }
 
-        function nextSlide() {
-            const nextSlideIndex = (currentSlide + 1) % slides.length;
-            showSlide(nextSlideIndex);
-        }
-
-        // Show the first slide immediately (no fade-in)
+        function nextSlide() { const nextSlideIndex = (currentSlide + 1) % slides.length; showSlide(nextSlideIndex); }
         slides[currentSlide].style.zIndex = '10';
         slides[currentSlide].style.opacity = '1';
-        
-        // Start the loop
         setInterval(nextSlide, slideDuration);
     }
-    initHeroSlider(); // Run the hero slider function
-    
+    initHeroSlider(); 
     
     // --- Console Greeting (Global) ---
     console.log('%c THHANKNAY & ASSOCIATES ', 'background: #1e303e; color: white; font-size: 20px; padding: 10px;');

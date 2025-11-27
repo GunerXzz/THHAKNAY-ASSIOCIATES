@@ -86,14 +86,22 @@
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden lg:hidden fixed inset-0 bg-white z-40 pt-16"> <div class="container h-full">
-                <nav class="flex flex-col justify-center items-center h-full gap-8">
-                    <a href="index.html" class="text-2xl font-heading font-semibold text-primary hover:text-gold transition-colors">Home</a>
-                    <a href="about.html" class="text-2xl font-heading font-semibold text-gold transition-colors">About Us</a>
-                    <a href="practice.html" class="text-2xl font-heading font-semibold text-primary hover:text-gold transition-colors">Practice Areas</a>
-                    <a href="our-people.html" class="text-2xl font-heading font-semibold text-primary hover:text-gold transition-colors">Our People</a>
-                    <a href="contact.html" class="text-2xl font-heading font-semibold text-primary hover:text-gold transition-colors">Contact</a>
-                    <a href="#" class="mt-4 bg-gold text-primary font-semibold px-8 py-3 rounded text-xl transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5">
+        <!-- UPDATED MOBILE MENU: Dark Background with Pattern -->
+        <div id="mobile-menu" class="hidden lg:hidden fixed inset-0 bg-primary z-40 pt-20 overflow-hidden">
+            <div class="absolute -right-20 top-1/4 opacity-10 pointer-events-none">
+                <div class="w-64 h-64 khmer-pattern">
+                    <img src="images/rumdul kbach.png" alt="Pattern">
+                </div>
+            </div>
+            <div class="container h-full relative z-10">
+                <nav class="flex flex-col justify-start items-center h-full gap-6 pt-8">
+                    <a href="index.html" class="text-2xl font-heading font-semibold text-white hover:text-gold transition-colors">Home</a>
+                    <a href="about.html" class="text-2xl font-heading font-semibold text-gold border-b-2 border-gold pb-1">About Us</a>
+                    <a href="practice.html" class="text-2xl font-heading font-semibold text-white hover:text-gold transition-colors">Practice Areas</a>
+                    <a href="our-people.html" class="text-2xl font-heading font-semibold text-white hover:text-gold transition-colors">Our People</a>
+                    <a href="contact.html" class="text-2xl font-heading font-semibold text-white hover:text-gold transition-colors">Contact</a>
+                    
+                    <a href="#" class="mt-6 bg-white text-primary font-bold px-8 py-3 rounded text-xl transition-all duration-300 hover:bg-gold hover:text-primary hover:-translate-y-0.5 shadow-lg">
                         Switch to Khmer (KH)
                     </a>
                 </nav>
