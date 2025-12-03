@@ -39,6 +39,9 @@
                     // We can define the gold glow here for Tailwind
                     boxShadow: {
                         'gold-glow': '0 10px 30px -5px rgba(209, 180, 100, 0.7)',
+                    },
+                    animation: {
+                        'spin-slow': 'spin 20s linear infinite',
                     }
                 }
             }
@@ -119,7 +122,7 @@
                      style="background-image: linear-gradient(rgba(30, 48, 62, 0.7), rgba(30, 48, 62, 0.7)), url('images/p6.jpg');">
                 </div>
                 <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0"
-                     style="background-image: linear-gradient(rgba(30, 48, 62, 0.7), rgba(30, 48, 62, 0.7)), url('images/p23.jpg');">
+                     style="background-image: linear-gradient(rgba(30, 48, 62, 0.7), rgba(30, 48, 62, 0.7)), url('images/p17.jpg');">
                 </div>
             </div>
             <div class="absolute top-10 left-10 opacity-20 z-30">
@@ -152,17 +155,29 @@
                             Our team of dedicated attorneys combines legal expertise with a client-focused approach, ensuring personalized attention and strategic guidance at every step. We have extensive experience examining and negotiating a wide range of contracts and agreements—including agency and distribution agreements, partnership agreements, shareholder agreements, and other business contracts. We pride ourselves on our integrity, professionalism, and unwavering commitment to achieving the best possible outcomes.
                         </p>
                     </div>
+                    
+                    <!-- VIDEO CARD FIX START -->
                     <div class="relative">
                         <div class="absolute top-0 left-0 w-full h-full bg-gray-50 rounded-lg transform -translate-x-4 translate-y-4" aria-hidden="true"></div>
-                        <img src="images/p14.jpg" alt="Our team collaborating in the office" class="rounded-lg shadow-2xl w-full relative z-10">
+                        <video 
+                            src="images/vid.mp4" 
+                            class="rounded-lg shadow-2xl w-full relative z-10"
+                            autoplay 
+                            muted 
+                            loop 
+                            playsinline>
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
+                    <!-- VIDEO CARD FIX END -->
+
                 </div>
             </div>
         </section>
 
         <section id="purpose" class="py-24 bg-gray-50 khmer-bg relative overflow-hidden">
-            <div class="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
-                <img src="images/logo.png.png" alt="" class="w-1/2 md:w-1/3 h-auto max-w-lg">
+            <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
+                <img src="images/Tep.png" alt="" class="w-1/2 md:w-1/3 h-auto max-w-lg">
             </div>
             <div class="container relative z-10">
                 <div class="grid md:grid-cols-2 gap-16 items-start">
@@ -206,6 +221,7 @@
             </div>
             <div class="container max-w-4xl mx-auto relative z-10">
                 <div class="text-center max-w-2xl mx-auto mb-16">
+                    <div class="flex justify-center mb-4"><div class="w-12 h-12 text-primary animate-divine"><img src="images/Tep.png" alt=""></div></div>
                     <p class="text-lg font-semibold text-gold mb-2 tracking-wide">OUR HISTORY</p>
                     <div class="flex justify-center items-center gap-4 md:gap-8 mb-4">
                         <img src="images/rumdul kbach.png" alt="" class="w-10 h-10 md:w-12 md:h-12 khmer-pattern opacity-80">
@@ -271,6 +287,7 @@
 
             <div class="container relative z-10">
                 <div class="text-center max-w-3xl mx-auto mb-16">
+                    <div class="flex justify-center mb-4"><div class="w-12 h-12 text-primary animate-divine"><img src="images/Tep.png" alt=""></div></div>
                     <p class="text-lg font-semibold text-gold mb-2 tracking-wide">OUR CULTURE</p>
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-heading">A Glimpse Into Our Firm</h2>
                     <p class="text-base lg:text-lg text-gray-600 leading-relaxed">A look at our valued partners, our workplace, and our commitment to the community.</p>
@@ -298,13 +315,13 @@
                     
                     <!-- === NEW GALLERY SLIDER (2x3 GRID) === -->
                     <div class="gallery-slider-container">
-                         <!-- Navigation Buttons -->
-                         <button class="gallery-nav-btn gallery-prev" aria-label="Previous Slide">
+                        
+                        <button class="gallery-nav-btn gallery-prev" aria-label="Previous Slide">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                         </button>
-
+                        
                         <div class="gallery-slider-track">
-                            <!-- Slide 1 -->
+                            
                             <div class="gallery-slide-group">
                                 <div class="gallery-grid">
                                     <div class="gallery-image-wrapper"><img src="images/p10.jpg" alt="Team Meeting"></div>
@@ -315,20 +332,65 @@
                                     <div class="gallery-image-wrapper"><img src="images/c8.jpg" alt="Discussion"></div>
                                 </div>
                             </div>
-                            <!-- Slide 2 -->
+
                             <div class="gallery-slide-group">
                                 <div class="gallery-grid">
-                                    <div class="gallery-image-wrapper"><img src="images/p15.jpg" alt="Modern Office"></div>
-                                    <div class="gallery-image-wrapper"><img src="images/p16.jpg" alt="Outreach"></div>
-                                    <div class="gallery-image-wrapper"><img src="images/p11.jpg" alt="Team"></div>
-                                    <div class="gallery-image-wrapper"><img src="images/c6.jpg" alt="Collaboration"></div>
-                                    <div class="gallery-image-wrapper"><img src="images/p13.jpg" alt="Office"></div>
-                                    <div class="gallery-image-wrapper"><img src="images/c7.jpg" alt="Event"></div>
+                                    <div class="gallery-image-wrapper"><img src="images/p15.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/p16.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/p11.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/c6.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/p13.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/c7.jpg" alt=""></div>
                                 </div>
                             </div>
+
+                            <div class="gallery-slide-group">
+                                <div class="gallery-grid">
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_6212.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_6291.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_6300.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_6490.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_6634.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_6814.jpg" alt=""></div>                                         
+                                </div>
+                            </div>
+
+                            <div class="gallery-slide-group">
+                                <div class="gallery-grid">
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_7407.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_7839.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_7447.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_7499.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_7641.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_7802.jpg" alt=""></div>                                         
+                                </div>
+                            </div>
+                            
+                            <div class="gallery-slide-group">
+                                <div class="gallery-grid">
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_7937.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_7947.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_8010.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_8088.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_8303.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_8321.jpg" alt=""></div>                                         
+                                </div>
+                            </div>
+
+                            <div class="gallery-slide-group">
+                                <div class="gallery-grid">
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_7973.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_8112.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_8137.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_8164.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_7214.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/DSC_7443.jpg" alt=""></div>                                         
+                                </div>
+                            </div>
+
                         </div>
 
-                         <button class="gallery-nav-btn gallery-next" aria-label="Next Slide">
+                        <button class="gallery-nav-btn gallery-next" aria-label="Next Slide">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </button>
 

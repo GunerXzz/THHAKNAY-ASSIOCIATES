@@ -324,3 +324,18 @@ section {
     .gallery-prev { left: 20px; }
     .gallery-next { right: 20px; }
 }
+
+@keyframes divine-float {
+            0%, 100% {
+                transform: translateY(0px);
+                filter: drop-shadow(0 0 20px rgba(209, 180, 100, 0.6));
+            }
+            50% {
+                transform: translateY(-15px); 
+                filter: drop-shadow(0 0 50px rgba(255, 215, 0, 1.0)); 
+            }
+        }
+
+        .animate-divine {
+            animation: divine-float 5s ease-in-out infinite;
+        }
