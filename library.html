@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/Thhaknay_Logo.jpg">
+    <title>Library - THHAKNAY & ASSOCIATES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&family=Noto+Sans+Khmer:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                container: {
+                    center: true,
+                    padding: '1rem',
+                    screens: {
+                        sm: '640px',
+                        md: '768px',
+                        lg: '1024px',
+                        xl: '1400px',
+                        '2xl': '1400px',
+                    }
+                },
+                extend: {
+                    colors: {
+                        primary: '#1e303e',
+                        'primary-light': '#2a4456',
+                        'gold': '#D1B464', 
+                    },
+                    fontFamily: {
+                        'body': ['Inter', 'Noto Sans Khmer', 'sans-serif'],
+                        'heading': ['Montserrat', 'Noto Sans Khmer', 'sans-serif'],
+                        'khmer': ['Noto Sans Khmer', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'gold-glow': '0 10px 30px -5px rgba(209, 180, 100, 0.7)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Card Background Texture from 3D Section */
+        .library-card {
+            background-image: url('images/32.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
+            /* Flex layout to space content */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 2rem; /* Inner spacing to show the texture around the book */
+        }
+
+        .library-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(209, 180, 100, 0.4); /* Gold Glow */
+        }
+
+        /* Book Cover Wrapper inside the texture */
+        .book-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            margin-bottom: 1.5rem;
+            background-color: #fff; /* Fallback */
+        }
+    </style>
+</head>
+<body class="font-body bg-gray-50"> 
+
+    <header class="fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300 ease-in-out">
+        <div class="container h-full">
+            <div class="flex items-center justify-between h-full">
+                <a href="index.html" class="font-bold text-white flex items-center gap-3 font-heading transition-colors duration-300">
+                    <div class="w-10 h-10 khmer-flower">
+                        <img src="images/Thhaknay_Logo.jpg" alt="THHAKNAY & ASSOCIATES Logo" class="rounded-full" />
+                    </div>
+                    <span class="text-base sm:text-lg lg:hidden">THHAKNAY & ASSOCIATES</span>
+                    <span class="hidden lg:inline lg:text-lg xl:text-xl">THHAKNAY & ASSOCIATES</span>
+                </a>
+
+                <nav class="hidden lg:flex items-center md:gap-2 lg:gap-4 xl:gap-6">
+                    <a href="index.html" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base">Home</a>
+                    <a href="about.html" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base">About Us</a>
+                    <a href="practice.html" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base">Practice Areas</a>
+                    <a href="our-people.html" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base">Our People</a>
+                    <a href="library.html" class="text-white pb-2 border-b-2 border-gold transition-colors duration-300 md:text-sm lg:text-base">Library</a>
+                    <a href="contact.html" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base">Contact</a>
+                    
+                    <div class="relative">
+                        <button id="language-toggle-btn" class="bg-gold text-primary font-semibold rounded transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5 md:px-3 md:py-1 md:text-sm lg:px-4 lg:py-2 lg:text-base xl:px-6 flex items-center gap-1">
+                            <span>EN</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="language-menu" class="hidden absolute top-full right-0 mt-2 w-36 bg-white rounded-lg shadow-lg z-50 overflow-hidden">
+                            <a href="#" class="block px-4 py-2 text-primary hover:bg-gray-100 font-medium">English (EN)</a>
+                            <a href="#" class="block px-4 py-2 text-primary hover:bg-gray-100 font-medium">Khmer (KH)</a>
+                        </div>
+                    </div>
+                </nav>
+
+                <button id="mobile-menu-btn" class="lg:hidden text-white transition-colors duration-300" aria-label="Toggle menu" aria-controls="mobile-menu" aria-expanded="false">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden fixed inset-0 bg-primary z-40 pt-20 overflow-hidden">
+            <div class="absolute -right-20 top-1/4 opacity-10 pointer-events-none">
+                <div class="w-64 h-64 khmer-pattern">
+                    <img src="images/rumdul kbach.png" alt="Pattern">
+                </div>
+            </div>
+            <div class="container h-full relative z-10">
+                <nav class="flex flex-col justify-start items-center h-full gap-6 pt-8">
+                    <a href="index.html" class="text-2xl font-heading font-semibold text-white hover:text-gold transition-colors">Home</a>
+                    <a href="about.html" class="text-2xl font-heading font-semibold text-white hover:text-gold transition-colors">About Us</a>
+                    <a href="practice.html" class="text-2xl font-heading font-semibold text-white hover:text-gold transition-colors">Practice Areas</a>
+                    <a href="our-people.html" class="text-2xl font-heading font-semibold text-white hover:text-gold transition-colors">Our People</a>
+                    <a href="library.html" class="text-2xl font-heading font-semibold text-gold border-b-2 border-gold pb-1">Library</a>
+                    <a href="contact.html" class="text-2xl font-heading font-semibold text-white hover:text-gold transition-colors">Contact</a>
+                    
+                    <a href="#" class="mt-6 bg-white text-primary font-bold px-8 py-3 rounded text-xl transition-all duration-300 hover:bg-gold hover:text-primary hover:-translate-y-0.5 shadow-lg">
+                        Switch to Khmer (KH)
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero-slider" class="relative h-[60vh] flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 w-full h-full">
+                <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0" style="background-image: linear-gradient(rgba(30, 48, 62, 0.8), rgba(30, 48, 62, 0.8)), url('images/p24.jpg');"></div>
+                <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0" style="background-image: linear-gradient(rgba(30, 48, 62, 0.8), rgba(30, 48, 62, 0.8)), url('images/PAGE-Practies2.jpg');"></div>
+                <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0" style="background-image: linear-gradient(rgba(30, 48, 62, 0.8), rgba(30, 48, 62, 0.8)), url('images/PAGE-Practies3.jpg');"></div>
+            </div>
+            <div class="absolute top-10 left-10 opacity-100 z-30">
+                <div class="w-32 h-32 text-white animate-divine">
+                    <img src="images/Tep.png" alt="Tep"> 
+                </div>
+            </div>
+            <div class="absolute bottom-10 right-10 opacity-100 z-30">
+                <div class="w-32 h-32 text-white animate-divine">
+                    <img src="images/Tep.png" alt="Tep"> 
+                </div>
+            </div>
+            <div class="container relative z-40 text-center text-white pt-16"> 
+                <h1 class="text-4xl md:text-6xl font-bold font-heading mb-4">Legal Library</h1>
+                <p class="text-lg text-gold font-semibold"><a href="index.html" class="hover:text-white">Home</a> / <span class="text-white">Library</span></p>
+            </div>
+        </section>
+        
+
+        <!-- === THE LIBRARY GRID === -->
+        <section id="library-content" class="py-24 bg-gray-50 khmer-bg">
+            <div class="container">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <p class="text-lg font-semibold text-gold mb-2 tracking-wide">LEGAL RESOURCES</p>
+                    <div class="flex justify-center items-center gap-4 md:gap-8 mb-4">
+                        <img src="images/rumdul kbach.png" alt="" class="w-10 h-10 md:w-12 md:h-12 khmer-pattern opacity-80">
+                        <h2 class="text-3xl md:text-4xl font-bold text-primary text-center font-heading">Cambodian Law Codes</h2>
+                        <img src="images/rumdul kbach.png" alt="" class="w-10 h-10 md:w-12 md:h-12 khmer-pattern opacity-80">
+                    </div>
+                    <p class="text-base lg:text-lg text-gray-600 leading-relaxed mt-4">
+                        A curated collection of essential legal documents.
+                    </p>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="max-w-xl mx-auto mb-16">
+                    <div class="relative">
+                        <input type="text" id="library-search" placeholder="Search for documents..." class="w-full pl-12 pr-4 py-4 rounded-full border-2 border-gold/30 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20 shadow-lg text-gray-700 bg-white transition-all duration-300">
+                        <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gold">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LIBRARY GRID -->
+                <div id="library-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+                    
+                    <!-- Book Card 1 -->
+                    <div class="library-card group rounded-xl" data-title="ក្រមនីតិវិធីព្រហ្មទណ្ឌ ២០០៧ Criminal Procedure Code of 2007">
+                        <!-- Book Cover (Clickable) -->
+                        <a href="images/pdfs/ក្រមនីតិវិធីព្រហ្មទណ្ឌ២០០៧.pdf" target="_blank" class="block book-wrapper aspect-[3/4]">
+                            <img src="images/ក្រមនីតិវិធីព្រហ្មទណ្ឌ២០០៧.jpg" onerror="this.onerror=null;this.src='https://placehold.co/360x480/1e303e/D1B464?text=Civil+Code';" alt="Civil Code" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <!-- Overlay -->
+                            <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
+                                <svg class="w-10 h-10 text-gold animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                <span class="text-white font-bold text-sm tracking-wide">VIEW PDF</span>
+                            </div>
+                        </a>
+                        
+                        <!-- Content -->
+                        <div class="text-center">
+                            <h3 class="text-xl font-bold text-white mb-2 font-khmer group-hover:text-gold transition-colors drop-shadow-md">ក្រមនីតិវិធីព្រហ្មទណ្ឌ ២០០៧</h3>
+                            <p class="text-gray-300 text-sm mb-6 drop-shadow-md">Criminal Procedure Code of 2007</p>
+                            <a href="images/pdfs/ក្រមនីតិវិធីព្រហ្មទណ្ឌ២០០៧.pdf" download class="inline-block bg-white text-primary font-bold px-6 py-3 rounded-full hover:bg-gold hover:text-white transition-all duration-300 w-full shadow-lg border-2 border-transparent hover:border-white">
+                                Download File
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Book Card 2 -->
+                    <div class="library-card group rounded-xl" data-title="ក្រមនីតិវិធីរដ្ឋប្បវេណី ២០០៦ Code of Civil Procedure of 2006">
+                        <a href="images/pdfs/ក្រមនីតិវិធីរដ្ឋប្បវេណី_២០០៦.pdf" target="_blank" class="block book-wrapper aspect-[3/4]">
+                            <img src="images/ក្រមនីតិវិធីរដ្ឋប្បវេណី_២០០៦.jpg" onerror="this.onerror=null;this.src='https://placehold.co/360x480/1e303e/D1B464?text=Labor+Law';" alt="Labor Law" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
+                                <svg class="w-10 h-10 text-gold animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                <span class="text-white font-bold text-sm tracking-wide">VIEW PDF</span>
+                            </div>
+                        </a>
+                        <div class="text-center">
+                            <h3 class="text-xl font-bold text-white mb-2 font-khmer group-hover:text-gold transition-colors drop-shadow-md">ក្រមនីតិវិធីរដ្ឋប្បវេណី ២០០៦</h3>
+                            <p class="text-gray-300 text-sm mb-6 drop-shadow-md">Code of Civil Procedure of 2006</p>
+                            <a href="images/pdfs/ក្រមនីតិវិធីរដ្ឋប្បវេណី_២០០៦.pdf" download class="inline-block bg-white text-primary font-bold px-6 py-3 rounded-full hover:bg-gold hover:text-white transition-all duration-300 w-full shadow-lg border-2 border-transparent hover:border-white">
+                                Download File
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Book Card 3 -->
+                    <div class="library-card group rounded-xl" data-title="ក្រមព្រហ្មទណ្ឌនៃព្រះរាជាណាចក្រកម្ពុជានិងវិសោធនកម្ម Criminal Code of the Kingdom of Cambodia">
+                        <a href="images/pdfs/ក្រមព្រហ្មទណ្ឌនៃព្រះរាជាណាចក្រកម្ពុជានិងវិសោធនកម្ម.pdf" target="_blank" class="block book-wrapper aspect-[3/4]">
+                            <img src="images/ក្រមព្រហ្មទណ្ឌនៃព្រះរាជាណាចក្រកម្ពុជានិងវិសោធនកម្ម.jpg" onerror="this.onerror=null;this.src='https://placehold.co/360x480/1e303e/D1B464?text=Criminal+Code';" alt="Criminal Code" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
+                                <svg class="w-10 h-10 text-gold animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                <span class="text-white font-bold text-sm tracking-wide">VIEW PDF</span>
+                            </div>
+                        </a>
+                        <div class="text-center">
+                            <h3 class="text-xl font-bold text-white mb-2 font-khmer group-hover:text-gold transition-colors drop-shadow-md">ក្រមព្រហ្មទណ្ឌនៃព្រះរាជាណាចក្រកម្ពុជានិងវិសោធនកម្ម</h3>
+                            <p class="text-gray-300 text-sm mb-6 drop-shadow-md">Criminal Code of the Kingdom of Cambodia</p>
+                            <a href="images/pdfs/ក្រមព្រហ្មទណ្ឌនៃព្រះរាជាណាចក្រកម្ពុជានិងវិសោធនកម្ម.pdf" download class="inline-block bg-white text-primary font-bold px-6 py-3 rounded-full hover:bg-gold hover:text-white transition-all duration-300 w-full shadow-lg border-2 border-transparent hover:border-white">
+                                Download File
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Book Card 4 -->
+                    <div class="library-card group rounded-xl" data-title="ក្រមរដ្ឋប្បវេណីនៃព្រះរាជាណាចក្រកម្ពុជា Civil Code of the Kingdom of Cambodia">
+                        <a href="images/pdfs/ក្រមរដ្ឋប្បវេណីនៃព្រះរាជាណាចក្រកម្ពុជា.pdf" target="_blank" class="block book-wrapper aspect-[3/4]">
+                            <img src="images/ក្រមរដ្ឋប្បវេណីនៃព្រះរាជាណាចក្រកម្ពុជា.jpg" onerror="this.onerror=null;this.src='https://placehold.co/360x480/1e303e/D1B464?text=Land+Law';" alt="Land Law" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
+                                <svg class="w-10 h-10 text-gold animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                <span class="text-white font-bold text-sm tracking-wide">VIEW PDF</span>
+                            </div>
+                        </a>
+                        <div class="text-center">
+                            <h3 class="text-xl font-bold text-white mb-2 font-khmer group-hover:text-gold transition-colors drop-shadow-md">ក្រមរដ្ឋប្បវេណីនៃព្រះរាជាណាចក្រកម្ពុជា</h3>
+                            <p class="text-gray-300 text-sm mb-6 drop-shadow-md">Civil Code of the Kingdom of Cambodia</p>
+                            <a href="images/pdfs/ក្រមរដ្ឋប្បវេណីនៃព្រះរាជាណាចក្រកម្ពុជា.pdf" download class="inline-block bg-white text-primary font-bold px-6 py-3 rounded-full hover:bg-gold hover:text-white transition-all duration-300 w-full shadow-lg border-2 border-transparent hover:border-white">
+                                Download File
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Book Card 5 -->
+                    <div class="library-card group rounded-xl" data-title="ច្បាប់ស្តីពីមជ្ឈត្តការផ្នែកពាណិជ្ជកម្ម Law on Commercial Arbitration">
+                        <a href="images/pdfs/ច្បាប់ស្តីពីមជ្ឈត្តការផ្នែកពាណិជ្ជកម្ម (០១០០៥០៦).pdf" target="_blank" class="block book-wrapper aspect-[3/4]">
+                            <img src="images/ច្បាប់ស្តីពីមជ្ឈត្តការផ្នែកពាណិជ្ជកម្ម (០១០០៥០៦).jpg" onerror="this.onerror=null;this.src='https://placehold.co/360x480/1e303e/D1B464?text=Commercial+Law';" alt="Commercial Law" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
+                                <svg class="w-10 h-10 text-gold animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                <span class="text-white font-bold text-sm tracking-wide">VIEW PDF</span>
+                            </div>
+                        </a>
+                        <div class="text-center">
+                            <h3 class="text-xl font-bold text-white mb-2 font-khmer group-hover:text-gold transition-colors drop-shadow-md">ច្បាប់ស្តីពីមជ្ឈត្តការផ្នែកពាណិជ្ជកម្ម</h3>
+                            <p class="text-gray-300 text-sm mb-6 drop-shadow-md">Law on Commercial Arbitration</p>
+                            <a href="images/pdfs/ច្បាប់ស្តីពីមជ្ឈត្តការផ្នែកពាណិជ្ជកម្ម (០១០០៥០៦).pdf" download class="inline-block bg-white text-primary font-bold px-6 py-3 rounded-full hover:bg-gold hover:text-white transition-all duration-300 w-full shadow-lg border-2 border-transparent hover:border-white">
+                                Download File
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- View More Button -->
+                <div class="text-center mt-20">
+                    <p class="text-gray-600 mb-6">Need additional legal resources?</p>
+                    <a href="https://www.moj.gov.kh/kh/book-library" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3 rounded font-semibold shadow-md hover:bg-gold hover:text-primary transition-all duration-300 border-2 border-transparent hover:border-white group" target="_blank">
+                        View Official Ministry Resources
+                        <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="py-20 relative overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center"
+                style="background-image: linear-gradient(rgba(30, 48, 62, 0.85), rgba(30, 48, 62, 0.85)), 
+                url('images/p3 (1).jpg');">
+            </div>
+            <div class="absolute top-1/2 left-10 transform -translate-y-1/2 opacity-10">
+                <div class="w-40 h-40 text-white"><img src="images/Tep.png" alt=""></div>
+            </div>
+            <div class="absolute top-1/2 right-10 transform -translate-y-1/2 opacity-10">
+                <div class="w-40 h-40 text-white"><img src="images/Tep.png" alt=""></div>
+            </div>
+            <div class="relative z-10 container text-center text-white">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-6 font-heading">
+                    Let's Get Started. Contact Us Now<br>
+                    For A Complimentary Consultation
+                </h2>
+                <a href="contact.html" class="inline-block bg-white text-primary px-10 py-4 text-lg font-semibold rounded shadow-lg transition-all duration-300 hover:bg-gray-100 hover:-translate-y-0.5">
+                    Contact Us Now
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-primary text-white relative overflow-hidden">
+        <div class="absolute top-10 right-10 opacity-5"><div class="w-64 h-64"><img src="images/ROMDOL.png" alt=""></div></div>
+        <div class="container py-12 relative z-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-start gap-3 mb-6"><svg class="w-5 h-5 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <div><h3 class="font-bold mb-2 font-heading">Our Office</h3><a href="https://maps.app.goo.gl/fopypKBtva8xBSrGA?g_st=it" class="text-gray-300 text-sm hover:text-gold" target="_blank"><p class="text-gray-300 text-sm hover:text-gold">Building #825, Floor 3A, Preah Monivong Boulevard, Deum Takov Commune, ChamkaMorn District, Phom Penh</p></a></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-start gap-3 mb-6"><svg class="w-5 h-5 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <div><h3 class="font-bold mb-2 font-heading">Email Us</h3><a href="mailto:thhaknayandassociates@yahoo.com" class="text-gray-300 text-sm hover:text-gold break-words">thhaknayandassociates@yahoo.com</a></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-start gap-3 mb-6"><svg class="w-5 h-5 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <div><h3 class="font-bold mb-2 font-heading">Call Us</h3><a href="tel:+85516827775" class="text-gray-300 text-sm hover:text-gold block">+855(0) 16 827775</a><a href="tel:+85561827775" class="text-gray-300 text-sm hover:text-gold block">+855(0) 61 827775</a><a href="tel:+85567877775" class="text-gray-300 text-sm hover:text-gold block">+855(0) 67 877775</a></div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4 font-heading">Follow Us</h3>
+                    <div class="flex gap-3">
+                        <a href="https://web.facebook.com/profile.php?id=100072000717096" class="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-gold/50 transition-colors" aria-label="Facebook"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                        <a href="https://www.instagram.com/thhaknay_and_associates/" class="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-gold/50 transition-colors" aria-label="Instagram" target="blank"><img src="images/ig.png" alt="instagram Icon" class="w-5 h-5"></a>
+                        <a href="https://t.me/+85567877775" class="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-gold/50 transition-colors" aria-label="Telegram" target="blank"><img src="images/telegram.png" alt="telegram Icon" class="w-5 h-5"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 pt-8 border-t border-white/20">
+                <div><h2 class="text-2xl font-bold mb-4 flex items-center gap-2 font-heading"><div class="w-10 h-15"><img src="images/Tep.png" alt=""></div>THHAKNAY & ASSOCIATES</h2><p class="text-gray-300 text-sm leading-relaxed">A premier legal practice delivering comprehensive solutions to clients across diverse industries, with expertise spanning domestic and international transactions.</p></div>
+                <div><h3 class="font-bold mb-4 font-heading">Quick Links</h3><ul class="space-y-2 text-sm"><li><a href="index.html" class="text-gray-300 hover:text-gold">Home</a></li><li><a href="about.html" class="text-gray-300 hover:text-gold">About Us</a></li><li><a href="practice.html" class="text-gray-300 hover:text-gold">Practice Areas</a></li><li><a href="our-people.html" class="text-gray-300 hover:text-gold">Our People</a></li><li><a href="library.html" class="text-gray-300 hover:text-gold">Library</a></li><li><a href="contact.html" class="text-gray-300 hover:text-gold">Contact</a></li></ul></div>
+                <div><h3 class="font-bold mb-4 font-heading">Business Hours</h3><p class="flex justify-between text-gray-300 text-sm mb-2"><span>Monday - Friday:</span><span class="text-white">9:00 AM - 5:30 PM</span></p><p class="flex justify-between text-gray-300 text-sm mb-2"><span>Saturday:</span><span class="text-white">9:00 AM - 12:00 PM</span></p><p class="flex justify-between text-gray-300 text-sm"><span>Sunday & Holidays:</span><span class="text-white">Closed</span></p></div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-white/20 text-center text-sm text-gray-300"><p>© THHAKNAY & ASSOCIATES - 2025 - All Rights Reserved</p></div>
+        </div>
+    </footer>
+
+    <script src="js/global.js"></script>
+    <script src="js/SmoothScroll.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('library-search');
+            const libraryGrid = document.getElementById('library-grid');
+            const cards = libraryGrid.querySelectorAll('.library-card');
+
+            if (searchInput) {
+                searchInput.addEventListener('keyup', function(e) {
+                    const term = e.target.value.toLowerCase();
+
+                    cards.forEach(card => {
+                        // We added data-title attributes to the cards for easy searching
+                        const title = card.getAttribute('data-title').toLowerCase();
+                        
+                        if (title.includes(term)) {
+                            card.style.display = '';
+                            // Optional: Add animation for appearance
+                            card.classList.remove('opacity-50', 'scale-95');
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
