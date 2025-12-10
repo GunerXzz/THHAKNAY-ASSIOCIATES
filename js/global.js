@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentPath = window.location.pathname;
         const pageName = currentPath.split("/").pop() || 'index.html'; // Default to index.html
 
-        const navLinks = document.querySelectorAll('nav a');
+        // FIX: Only target direct children links of the nav (excludes dropdowns)
+        const navLinks = document.querySelectorAll('nav > a');
         
         navLinks.forEach(link => {
             const linkHref = link.getAttribute('href');
@@ -47,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             link.classList.add('border-transparent');
 
             // Match current page
-            if (linkHref === pageName || (pageName === 'index.html' && (linkHref === './' || linkHref === 'index.html'))) {
+            if (linkHref === pageName || (pageName === 'index.html' && (linkHref === './' || linkHref === 'index.html')) || (pageName === 'index-kh.html' && linkHref === 'index-kh.html')) {
                 link.classList.remove('border-transparent', 'text-white', 'text-gray-700');
                 link.classList.add('border-gold');
                 
@@ -55,9 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (window.scrollY > 50) {
                     link.classList.add('text-primary'); 
                 } else {
-                    // On transparent header, active link usually stays white or turns gold? 
-                    // Based on your design, let's keep it distinct.
-                    // If you want gold text on dark header:
                      link.classList.add('text-gold'); 
                 }
             }
@@ -75,7 +73,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!header) return;
 
         const logoLink = header.querySelector('a.font-bold');
-        const navLinks = header.querySelectorAll('nav.hidden a:not(.bg-gold)'); // Exclude buttons
+        
+        // FIX: Only target direct children (>) to avoid affecting the language dropdown items
+        const navLinks = header.querySelectorAll('nav.hidden > a'); 
+        
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const langBtn = document.getElementById('language-toggle-btn');
         
@@ -94,9 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Nav Links
             navLinks.forEach(link => {
-                link.classList.remove('text-white', 'text-gold'); // Remove text-gold to prevent conflict
-                // If it's the active border link, make it Primary or Gold?
-                // Usually dark text on white header
+                link.classList.remove('text-white', 'text-gold'); 
                 link.classList.add('text-gray-700');
             });
 
