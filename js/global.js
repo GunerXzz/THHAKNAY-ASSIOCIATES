@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             link.classList.add('border-transparent');
 
             // Match current page
-            if (linkHref === pageName || (pageName === 'index.html' && (linkHref === './' || linkHref === 'index.html')) || (pageName === 'index-kh.html' && linkHref === 'index-kh.html')) {
+            if (linkHref === pageName || (pageName === 'index.html' && (linkHref === './' || linkHref === 'index.html'))) {
                 link.classList.remove('border-transparent', 'text-white', 'text-gray-700');
                 link.classList.add('border-gold');
                 
@@ -154,27 +154,84 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // =========================================
-    // 5. LANGUAGE TOGGLE
+    // 5. LANGUAGE TRANSLATION LOGIC (NEW)
     // =========================================
-    function initLanguageToggle() {
-        const toggleBtn = document.getElementById('language-toggle-btn');
-        const menu = document.getElementById('language-menu');
-        
-        if (!toggleBtn || !menu) return; 
+    const langBtn = document.getElementById('language-toggle-btn');
+    const langMenu = document.getElementById('language-menu');
+    const langOptions = document.querySelectorAll('.lang-option');
+    
+    // Default Language
+    let currentLang = localStorage.getItem('site-language') || 'en';
 
-        toggleBtn.addEventListener('click', (e) => { 
-            e.stopPropagation(); 
-            menu.classList.toggle('hidden'); 
+    function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('site-language', lang);
+        
+        // Update Button Text
+        if(langBtn) {
+            const span = langBtn.querySelector('span');
+            if(span) span.textContent = lang === 'en' ? 'EN' : 'KH';
+        }
+
+        // Apply Translations
+        const elements = document.querySelectorAll('[data-lang-en]');
+        elements.forEach(el => {
+            const text = el.getAttribute(`data-lang-${lang}`);
+            if (text) {
+                // If it's an input with placeholder
+                if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
+                    el.setAttribute('placeholder', text);
+                } else if (el.tagName === 'H2' && el.querySelector('div img')) {
+                    // For h2 with image, only update text nodes, not the image div
+                    let textNode = el.lastChild;
+                    if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                        textNode.textContent = text;
+                    }
+                } else {
+                    // If the translation contains HTML tags, apply as HTML; otherwise set as text
+                    if (/<[a-z][\s\S]*>/i.test(text)) {
+                        el.innerHTML = text;
+                    } else {
+                        el.textContent = text;
+                    }
+                }
+            }
         });
 
-        window.addEventListener('click', (e) => { 
-            if (menu.classList.contains('hidden')) return; 
-            if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) { 
-                menu.classList.add('hidden'); 
-            } 
+        // Update Font Family
+        if (lang === 'kh') {
+            document.body.classList.add('font-khmer');
+        } else {
+            document.body.classList.remove('font-khmer');
+        }
+    }
+
+    // Event Listeners for Language Toggle
+    if (langBtn && langMenu) {
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langMenu.classList.toggle('hidden');
+        });
+
+        window.addEventListener('click', () => {
+            if (!langMenu.classList.contains('hidden')) {
+                langMenu.classList.add('hidden');
+            }
+        });
+
+        langOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const selectedLang = option.getAttribute('data-lang');
+                setLanguage(selectedLang);
+                langMenu.classList.add('hidden');
+            });
         });
     }
-    initLanguageToggle(); 
+
+    // Initialize Language on Load
+    setLanguage(currentLang);
+
 
     // =========================================
     // 6. HERO SLIDER (Global)
