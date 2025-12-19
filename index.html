@@ -9,8 +9,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&family=Noto+Sans+Khmer:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barriecito&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
+</style>
     <script>
         tailwind.config = {
             theme: {
@@ -61,6 +66,15 @@
 
         .animate-divine {
             animation: divine-float 5s ease-in-out infinite;
+        }
+
+        /* Font Logo */
+        
+        .cormorant-garamond {
+        font-family: "Cormorant Garamond", serif;
+        font-optical-sizing: auto;
+        font-weight: 700-700;
+        font-style: normal;
         }
 
         /* === 3D Cover Flow Styles === */
@@ -217,11 +231,9 @@
                     <div class="w-10 h-10 khmer-flower">
                         <img src="images/Thhaknay_Logo.jpg" alt="THHAKNAY & ASSOCIATES Logo" class="rounded-full" />
                     </div>
-                    
-                    <span class="text-base sm:text-lg lg:hidden" data-lang-en="THHAKNAY & ASSOCIATES" data-lang-kh="ថៈណាយ និងសហការី">THHAKNAY & ASSOCIATES</span>
-                    <span class="hidden lg:inline lg:text-lg xl:text-xl transition-colors" data-lang-en="THHAKNAY & ASSOCIATES" data-lang-kh="ថៈណាយ និងសហការី">THHAKNAY & ASSOCIATES</span>
+                    <span class="text-base sm:text-lg lg:hidden" style="font-family: 'Cormorant Garamond', serif;" data-lang-en="THHAKNAY & ASSOCIATES" data-lang-kh="ថៈណាយ និងសហការី">THHAKNAY & ASSOCIATES</span>
+                    <span class="hidden lg:inline lg:text-lg xl:text-xxl transition-colors" style="font-family: 'Cormorant Garamond', serif; font-size:xx-large" data-lang-en="THHAKNAY & ASSOCIATES" data-lang-kh="ថៈណាយ និងសហការី">THHAKNAY & ASSOCIATES</span>
                 </a>
-
                 <nav class="hidden lg:flex items-center md:gap-2 lg:gap-4 xl:gap-6">
                     <a href="index.html" class="text-white pb-2 border-b-2 border-gold transition-colors duration-300 md:text-sm lg:text-base" data-lang-en="Home" data-lang-kh="ទំព័រដើម">Home</a>
                     <a href="about.html" class="text-white pb-2 border-b-2 border-transparent hover:border-gold transition-colors duration-300 md:text-sm lg:text-base" data-lang-en="About Us" data-lang-kh="អំពីយើង">About Us</a>
@@ -277,13 +289,13 @@
     <section id="hero-slider" class="relative h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 w-full h-full">
             <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0"
-                 style="background-image: linear-gradient(rgba(30, 48, 62, 0.7), rgba(30, 48, 62, 0.7)), url('images/p6.jpg');">
+                style="background-image: linear-gradient(rgba(30, 48, 62, 0.7), rgba(30, 48, 62, 0.7)), url('images/p6.jpg');">
             </div>
             <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0"
-                 style="background-image: linear-gradient(rgba(30, 48, 62, 0.7), rgba(30, 48, 62, 0.7)), url('images/p8.jpg');">
+                style="background-image: linear-gradient(rgba(30, 48, 62, 0.7), rgba(30, 48, 62, 0.7)), url('images/p8.jpg');">
             </div>
             <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0"
-                 style="background-image: linear-gradient(rgba(30, 48, 62, 0.7), rgba(30, 48, 62, 0.7)), url('images/p20.png');">
+                style="background-image: linear-gradient(rgba(30, 48, 62, 0.7), rgba(30, 48, 62, 0.7)), url('images/p20.png');">
             </div>
         </div>
         <div class="absolute top-10 left-10 opacity-100 z-30">
@@ -292,13 +304,13 @@
             </div>
         </div>
         <div class="absolute bottom-10 right-10 opacity-100 z-30">
-             <div class="w-32 h-32 text-white animate-divine">
+            <div class="w-32 h-32 text-white animate-divine">
                 <img src="images/Tep.png" alt="Tep">
             </div>
         </div>
         <div class="relative z-20 container text-center text-white">
             <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight font-heading" data-lang-en="Our Intelligence<br>Your Advantage!!" data-lang-kh="Our Intelligence<br>Your Advantage!!">Our Intelligence<br>Your Advantage!!</h1>
-            <a href="contact.html" class="inline-block bg-gold text-primary font-semibold px-8 py-4 text-lg rounded shadow-lg transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5" data-lang-en="Schedule Consultation" data-lang-kh="ណាត់ជួបពិគ្រោះយោបល់">Schedule Consultation</a>
+            <a href="contact.html" class="inline-block bg-gold text-primary font-semibold px-8 py-4 text-lg rounded shadow-lg transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5" data-lang-en="Schedule Consultation" data-lang-kh="ណាត់ជួប និង​ពិគ្រោះយោបល់">Schedule Consultation</a>
         </div>
     </section>
 
@@ -317,7 +329,7 @@
                 </p>
             </div>
 
-             <!-- === GALLERY SLIDER (2x3 GRID) === -->
+            <!-- === GALLERY SLIDER (2x3 GRID) === -->
                     <div class="gallery-slider-container">
                         <button class="gallery-nav-btn gallery-prev" aria-label="Previous Slide">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
@@ -375,7 +387,7 @@
                             <!-- 5 -->
                             <div class="gallery-slide-group">
                                 <div class="gallery-grid">
-                                    <div class="gallery-image-wrapper"><img src="images/gallery/52.jpg" alt=""></div>
+                                    <div class="gallery-image-wrapper"><img src="images/gallery/81.jpg" alt=""></div>
                                     <div class="gallery-image-wrapper"><img src="images/gallery/53.jpg" alt=""></div>
                                     <div class="gallery-image-wrapper"><img src="images/gallery/55.jpg" alt=""></div>
                                     <div class="gallery-image-wrapper"><img src="images/gallery/83.jpg" alt=""></div>
@@ -457,7 +469,7 @@
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-heading" data-lang-en="Our Practice Areas" data-lang-kh="ផ្នែកសេវាកម្ម">Our Practice Areas</h2>
                     <p class="text-gray-600 text-base lg:text-lg leading-relaxed" data-lang-en="We provide expert counsel across the full spectrum of corporate and commercial law." data-lang-kh="យើងផ្តល់ការប្រឹក្សាផ្នែកច្បាប់ប្រកបដោយវិជ្ជាជីវៈលើគ្រប់ទិដ្ឋភាពនៃច្បាប់សាជីវកម្ម និងពាណិជ្ជកម្ម។">We provide expert counsel across the full spectrum of corporate and commercial law.</p>
                     <div class="mt-8">
-                         <a href="practice.html" class="inline-block bg-primary text-white px-8 py-3 rounded transition-all duration-300 hover:bg-primary-light hover:-translate-y-0.5" data-lang-en="View All Services" data-lang-kh="មើលសេវាកម្មទាំងអស់">View All Services</a>
+                        <a href="practice.html" class="inline-block bg-primary text-white px-8 py-3 rounded transition-all duration-300 hover:bg-primary-light hover:-translate-y-0.5" data-lang-en="View All Services" data-lang-kh="មើលសេវាកម្មទាំងអស់">View All Services</a>
                     </div>
                 </div>
                 <div class="lg:col-span-2">
@@ -469,28 +481,28 @@
                             <h3 class="text-xl font-bold text-gray-900 mb-3 font-heading" data-lang-en="Corporate Law" data-lang-kh="ច្បាប់សាជីវកម្ម">Corporate Law</h3>
                             <p class="text-gray-600 leading-relaxed" data-lang-en="Governance, M&A, and business structuring." data-lang-kh="អភិបាលកិច្ច, M&A, និងការរៀបចំរចនាសម្ព័ន្ធអាជីវកម្ម។">Governance, M&A, and business structuring.</p>
                         </a>
-                         <a href="practice.html#litigation" class="block bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all group border border-transparent hover:border-primary practice-card">
+                        <a href="practice.html#litigation" class="block bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all group border border-transparent hover:border-primary practice-card">
                             <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
                             </div>
                             <h3 class="text-xl font-bold text-gray-900 mb-3 font-heading" data-lang-en="Litigation" data-lang-kh="វិវាទ">Litigation</h3>
-                            <p class="text-gray-600 leading-relaxed" data-lang-en="Strategic dispute resolution." data-lang-kh="យុទ្ធសាស្តដំណោះស្រាយវិវាទ្រ។">Strategic dispute resolution.</p>
+                            <p class="text-gray-600 leading-relaxed" data-lang-en="Strategic dispute resolution." data-lang-kh="យុទ្ធសាស្តស្រាយវិវាទ្រ។">Strategic dispute resolution.</p>
                         </a>
-                         <a href="practice.html#compliance" class="block bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all group border border-transparent hover:border-primary practice-card">
+                        <a href="practice.html#compliance" class="block bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all group border border-transparent hover:border-primary practice-card">
                             <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                             </div>
                             <h3 class="text-xl font-bold text-gray-900 mb-3 font-heading" data-lang-en="Compliance" data-lang-kh="អនុលោមភាព">Compliance</h3>
                             <p class="text-gray-600 leading-relaxed" data-lang-en="Regulatory frameworks & licensing." data-lang-kh="ក្របខ័ណ្ឌបទប្បញ្ញត្តិ និងការផ្តល់អាជ្ញាប័ណ្ណ។">Regulatory frameworks & licensing.</p>
                         </a>
-                         <a href="practice.html#contract" class="block bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all group border border-transparent hover:border-primary practice-card">
+                        <a href="practice.html#contract" class="block bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all group border border-transparent hover:border-primary practice-card">
                             <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             </div>
                             <h3 class="text-xl font-bold text-gray-900 mb-3 font-heading" data-lang-en="Contract Law" data-lang-kh="ច្បាប់កិច្ចសន្យា">Contract Law</h3>
                             <p class="text-gray-600 leading-relaxed" data-lang-en="Drafting & negotiation." data-lang-kh="ការតាក់តែង និងការចរចា។">Drafting & negotiation.</p>
                         </a>
-                         <a href="practice.html#real-estate" class="block bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all group border border-transparent hover:border-primary practice-card">
+                        <a href="practice.html#real-estate" class="block bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all group border border-transparent hover:border-primary practice-card">
                             <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path></svg>
                             </div>
@@ -501,7 +513,7 @@
                             <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 font-heading" data-lang-en="Employment" data-lang-kh="ការងារ">Employment</h3>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 font-heading" data-lang-en="Employment" data-lang-kh="ច្បាប់ការងារ">Employment</h3>
                             <p class="text-gray-600 leading-relaxed" data-lang-en="Labor relations & rights." data-lang-kh="ទំនាក់ទំនងការងារ និងសិទ្ធិការងារ។">Labor relations & rights.</p>
                         </a>
                     </div>
@@ -853,7 +865,7 @@
                     <div class="flex gap-3">
                         <a href="https://web.facebook.com/profile.php?id=100072000717096" class="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-gold/50 transition-colors" aria-label="Facebook"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
                         <a href="https://www.instagram.com/thhaknay_and_associates/" class="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-gold/50 transition-colors" aria-label="Instagram" target="blank"><img src="images/ig.png" alt="instagram Icon" class="w-5 h-5"></a>
-                        <a href="https://t.me/+85567877775" class="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-gold/50 transition-colors" aria-label="Telegram" target="blank"><img src="images/telegram.png" alt="telegram Icon" class="w-5 h-5"></a>
+                        <a href="https://t.me/thhaknayandassociates" class="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-gold/50 transition-colors" aria-label="Telegram" target="blank"><img src="images/telegram.png" alt="telegram Icon" class="w-5 h-5"></a>
                     </div>
                 </div>
             </div>
